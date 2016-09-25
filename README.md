@@ -5,6 +5,7 @@ Done for now
 - login in source - have username and password in the source code
 - sql - sql injection to login
 - robots - username and passwords in the robots.txt file
+- javascript injection - use javascript injection with the child_process node package in order to view file system
 
 Ideas
 - php - website that saves a file using php, use php vulnerabilities to execute php that will show the flag
