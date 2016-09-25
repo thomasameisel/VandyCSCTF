@@ -13,7 +13,7 @@ app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 let users = {
-  admin: 'qwerljasf!#$@#%13asl!ASFDBA'
+  admin: 'asWR2#$@sdbljQFASR123353'
 };
 
 app.post('/v1/session', function(req, res) {
@@ -26,12 +26,8 @@ app.post('/v1/session', function(req, res) {
   } else if (users[username] !== password) {
     res.status(401).send({ error: 'Username and password are incorrect' });
   } else {
-    res.status(201).send({ username: username });
+    res.status(201).send({ flag: 'always_check_source' });
   }
-});
-
-app.post('/v1/flag', function(req, res) {
-  res.status(201).send({ flag: 'post_to_me' });
 });
 
 let server = app.listen(8080, function () {
