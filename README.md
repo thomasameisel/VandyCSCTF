@@ -8,4 +8,3 @@ Done for now
 
 Ideas
 - php - website that saves a file using php, use php vulnerabilities to execute php that will show the flag
-- users - users.js is on the server, brings to flag
