@@ -6,6 +6,7 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let logger = require('morgan');
 let sqlite3 = require('sqlite3');
+let child_process = require('child_process');
 
 let db = new sqlite3.Database(__dirname + '/users.db');
 let app = express();
@@ -15,6 +16,9 @@ app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/v1/session', function(req, res) {
+  child_process.exec('ls', function (err, data) {
+    console.log(data);
+  });
   let username = req.body.username;
   let password = req.body.password;
   db.all('SELECT * FROM users WHERE username="' + username + '" AND password="' + password + '"',
@@ -26,10 +30,6 @@ app.post('/v1/session', function(req, res) {
         res.status(201).send({ flag: 'sanitize_your_inputs' });
       }
     });
-});
-
-app.post('/v1/flag', function(req, res) {
-  res.status(201).send({ flag: 'post_to_me' });
 });
 
 let server = app.listen(8080, function () {

@@ -24,10 +24,6 @@ function changeError(msg) {
   return false;
 }
 
-function showSuccess() {
-  $('#success').css('display', 'block');
-}
-
 function ajaxPost(url, jsonData, onSuccess, onError) {
   $.ajax({
     url: url,
