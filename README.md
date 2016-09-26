@@ -12,8 +12,9 @@
 - user agent - change user agent to get flag
 - php - website that saves a file using php, use php vulnerabilities to execute php that will show the flag
 - directory traversal - use directory traversal in order to access admin folder and download flag file
+- common password - admin's password is "password"
 
 #### Needs to be done:
-- Storage has to be implemente for the php challenge
+- Storage has to be implemented for the php challenge
 
 #### Ideas:
