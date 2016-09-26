@@ -6,6 +6,7 @@ Done for now
 - sql - sql injection to login
 - robots - username and passwords in the robots.txt file
 - javascript injection - use javascript injection with the child_process node package in order to view file system
+- xss - use xss scripting in a message to get the admin's password
 
 Ideas
 - php - website that saves a file using php, use php vulnerabilities to execute php that will show the flag

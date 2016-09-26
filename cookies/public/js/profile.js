@@ -44,12 +44,19 @@ function ajaxGet(url, onSuccess, onError) {
 }
 
 function loadText() {
-  let auth = JSON.parse(getCookie('auth'));
-  let username = getCookie('username');
-  if (auth) {
-    ajaxGet('/v1/user/' + username,
-      (data) => changeText(data.msg),
-      (data) => changeText(JSON.parse(data.responseText).error)
-    );
+  let authRaw = getCookie('auth');
+  if (authRaw) {
+    let auth = JSON.parse(authRaw);
+    let username = getCookie('username');
+    if (username && auth) {
+      ajaxGet('/v1/user/' + username,
+        (data) => changeText(data.msg),
+        (data) => changeText(JSON.parse(data.responseText).error)
+      );
+    } else {
+      logout();
+    }
+  } else {
+    logout();
   }
 }

@@ -16,9 +16,6 @@ app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/v1/session', function(req, res) {
-  child_process.exec('ls', function (err, data) {
-    console.log(data);
-  });
   let username = req.body.username;
   let password = req.body.password;
   db.all('SELECT * FROM users WHERE username="' + username + '" AND password="' + password + '"',

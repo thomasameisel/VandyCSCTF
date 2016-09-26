@@ -21,9 +21,12 @@ function getCookie(c_name) {
 }
 
 function checkLoggedIn() {
-  let auth = JSON.parse(getCookie('auth'));
-  if (auth) {
-    window.location.href = '/profile.html';
+  let authRaw = getCookie('auth');
+  if (authRaw) {
+    let auth = JSON.parse(authRaw);
+    if (auth) {
+      window.location.href = '/profile.html';
+    }
   }
 }
 

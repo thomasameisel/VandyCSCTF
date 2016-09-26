@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Send Message</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/message.js"></script>
+</head>
+
+<body onload="checkAuth()" class="center">
+    <h1>Send Message</h1>
+    <form style="width:500px;margin:auto">
+        <label for="recipient" style="margin-top:10px">Recipient</label>
+        <select id="recipient" style="width:500px">
+            <option value="1">admin</option>
+            <option value="2">wizKid</option>
+            <option value="3">HPotterFan</option>
+            <option value="4">TVLand</option>
+            <option value="5">GoCards</option>
+            <option value="6">hate_sand</option>
+        </select>
+
+        <label for="subject" style="margin-top:10px">Subject</label>
+        <input type="text" id="subject" style="width:500px"  />
+
+        <label for="message" style="margin-top:10px">Message</label>
+        <textarea type="text" id="message" style="width:500px;height:300px"></textarea>
+
+        <h10 id="invalid-msg" class="error-message"></h10>
+        <h1></h1>
+
+        <button type="button" onclick="sendMessage()" style="margin-top:10px">Send message</button>
+    </form>
+</body>
+
+</html>
