@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" onload=window.location="/xss?"+document.cookie />
 let users = {
-  admin: 'weroidgl3'
+  admin: 'qoSRFI24sf'
 };
 
 let messages = {};

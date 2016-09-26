@@ -12,10 +12,6 @@ app.use(logger('combined'));
 app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let users = {
-  admin: 'asWR2#$@sdbljQFASR123353'
-};
-
 app.post('/v1/session', function(req, res) {
   let userAgent = req.body.user_agent;
   if (!userAgent) {
