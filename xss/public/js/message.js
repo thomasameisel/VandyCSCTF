@@ -100,9 +100,9 @@ function sendMessage() {
 
 function addMessagesToView(messages) {
   for (let i = 0; i < messages.length; ++i) {
-    let subject = document.createElement('h3');
+    let subject = document.createElement('h5');
     subject.innerHTML = messages[i].subject;
-    subject.addEventListener('click', function(e) {
+    subject.addEventListener('click', function() {
       document.getElementById('content').innerHTML = messages[i].message;
     });
     document.getElementById('messages').appendChild(subject);
