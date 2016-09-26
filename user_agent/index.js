@@ -17,7 +17,7 @@ app.post('/v1/session', function(req, res) {
   if (!userAgent) {
     res.status(400).send({ error: 'Must specify user agent' });
   } else if (userAgent !== 'VandyCS') {
-    res.status(401).send({ error: 'Must come from VandyCS' });
+    res.status(401).send({ error: 'Must access from VandyCS browser' });
   } else {
     res.status(201).send({ flag: 'agents_for_users' });
   }

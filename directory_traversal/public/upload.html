@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload File</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/upload.js"></script>
+</head>
+
+<body onload="uploadOnload()">
+    <h1 class="center">Upload File</h1>
+
+    <form class="center">
+        <input type="file" id="file" style="display:inline" />
+        <button type="button" id="upload" onclick="uploadFile()" disabled>Upload</button>
+    </form>
+
+    <div class="center">
+        <h10 id="error-message" style="color:red" />
+    </div>
+</body>
+
+</html>
