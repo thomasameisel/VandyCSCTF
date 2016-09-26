@@ -8,6 +8,10 @@ Done for now
 - javascript injection - use javascript injection with the child_process node package in order to view file system
 - xss - use xss scripting in a message to get the admin's password
 - user agent - change user agent to get flag
+- php - website that saves a file using php, use php vulnerabilities to execute php that will show the flag
+
+Needs to be done:
+- Storage has to be implemente for the php challenge
 
 Ideas
-- php - website that saves a file using php, use php vulnerabilities to execute php that will show the flag
+
