@@ -16,6 +16,7 @@
 - common password - admin's password is "password"
 
 #### Needs to be done:
-- Storage has to be implemented for the php challenge
+- Storage has to be implemented for the php challenge (natas level 12)
 
 #### Ideas:
+- php echo name that allows a passthru to be executed (natas level 9)

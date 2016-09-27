@@ -4,7 +4,7 @@ function changeResponse(msg) {
   $('#response').text(msg);
 }
 
-function addChallengeToView(challenge) {
+function addChallengeToContent(challenge) {
   $('#challenge').empty();
 
   let challengeDiv = document.getElementById('challenge');
@@ -18,28 +18,36 @@ function addChallengeToView(challenge) {
     '<h5 id="response"></h5>\n';
 }
 
-function addChallengesToView(challenges) {
-  for (let i = 0; i < challenges.length; ++i) {
-    let challenge = document.createElement('a');
-    challenge.style = 'display:block';
-    challenge.id = challenges[i].file;
-    challenge.innerHTML = challenges[i].name;
-    challenge.addEventListener('click', () => {
-      populateChallenge(challenges[i].file);
-    });
-    document.getElementById('challenges').appendChild(challenge);
+function addChallengesToList(challenges) {
+  $('#challenges').empty();
+
+  if (challenges.length === 0) {
+    let allDone = document.createElement('p');
+    allDone.innerHTML = 'All done!';
+    document.getElementById('challenges').appendChild(allDone);
+  } else {
+    for (let i = 0; i < challenges.length; ++i) {
+      let challenge = document.createElement('a');
+      challenge.style = 'display:block';
+      challenge.id = challenges[i].challenge_id;
+      challenge.innerHTML = challenges[i].challenge_name + ' (' + challenges[i].points + ' points)';
+      challenge.addEventListener('click', () => {
+        populateChallenge(challenges[i].challenge_filename);
+      });
+      document.getElementById('challenges').appendChild(challenge);
+    }
   }
 }
 
-function populateChallenge(file) {
-  ajaxGet('/v1/challenge?name=' + file,
-    addChallengeToView,
+function populateChallenge(filename) {
+  ajaxGet('/v1/challenge?filename=' + filename,
+    addChallengeToContent,
     () => {});
 }
 
 function populateChallenges() {
   ajaxGet('/v1/challenges',
-    addChallengesToView,
+    addChallengesToList,
     () => {});
 }
 
@@ -47,10 +55,13 @@ function submitFlag() {
   let inputs = inputToJSON();
   if (inputs.flag && inputs.flag.length > 0) {
     ajaxPost('/v1/flag', inputs,
-      (data) => changeResponse(data.msg),
+      (data) => {
+        changeResponse(data.msg);
+        populateChallenges();
+        updatePoints();
+      },
       (data) => changeResponse(JSON.parse(data.responseText).error));
   } else {
-    console.log(inputs);
     changeResponse('Must supply challenge_id and flag');
   }
 }

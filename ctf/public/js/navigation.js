@@ -21,3 +21,8 @@ function goToChallenges() {
   loadFile('challenges.html');
   populateChallenges();
 }
+
+function goToLeaderboard() {
+  loadFile('leaderboard.html');
+  populateLeaderboard();
+}

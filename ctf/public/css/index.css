@@ -2,6 +2,12 @@
     text-align: center;
 }
 
+.table {
+    max-width: 650px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
 .form-horizontal {
     max-width: 650px;
     padding: 15px;
@@ -37,4 +43,8 @@
 .error-message {
     display: none;
     color: red;
+}
+
+a {
+    cursor: pointer;
 }

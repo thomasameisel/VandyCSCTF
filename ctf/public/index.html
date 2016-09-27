@@ -11,12 +11,13 @@
     <script type="text/javascript" src="js/header.js"></script>
     <script type="text/javascript" src="js/challenges.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/leaderboard.js"></script>
 </head>
 <body onload="changeHeader(); goToMain();">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">VandyCS CTF</a>
+                <a class="navbar-brand" onclick="goToMain()">VandyCS CTF</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -26,8 +27,9 @@
                     <li><a id="login_header" onclick="goToLogin()">Login</a></li>
                     <li><a id="signup_header" onclick="goToSignup()">Signup</a></li>
                     <li><a id="challenges_header" onclick="goToChallenges()">Challenges</a></li>
+                    <li><p id="points_header" class="navbar-text"></p></li>
+                    <li><p id="profile_header" class="navbar-text"></p></li>
                     <li><a id="logout_header" onclick="logout()">Logout</a></li>
-                    <li><a id="profile_header" onclick="goToProfile()"></a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
