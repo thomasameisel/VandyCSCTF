@@ -1,5 +1,5 @@
 {
-  "name": "sql_injection",
+  "name": "ctf",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,8 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "express-session": "^1.14.1",
     "morgan": "^1.7.0",
-    "sqlite3": "^3.1.4"
+    "sqlite3": "^3.1.4",
   }
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VandyCS CTF</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/ajaxCalls.js"></script>
+    <script type="text/javascript" src="js/navigation.js"></script>
+    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="js/challenges.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+</head>
+<body onload="changeHeader(); goToMain();">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">VandyCS CTF</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a id="leaderboard_header" onclick="goToLeaderboard()">Leaderboard</a></li>
+                    <li><a id="login_header" onclick="goToLogin()">Login</a></li>
+                    <li><a id="signup_header" onclick="goToSignup()">Signup</a></li>
+                    <li><a id="challenges_header" onclick="goToChallenges()">Challenges</a></li>
+                    <li><a id="logout_header" onclick="logout()">Logout</a></li>
+                    <li><a id="profile_header" onclick="goToProfile()"></a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div id="content"></div>
+</body>
+</html>

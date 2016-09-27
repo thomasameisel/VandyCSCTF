@@ -7,6 +7,7 @@
 - login in source - have username and password in the source code
 - sql - sql injection to login
 - robots - username and passwords in the robots.txt file
+  - In description add "Passwords are hidden so well that not even Google can find it"
 - javascript injection - use javascript injection with the child_process node package in order to view file system
 - xss - use xss scripting in a message to get the admin's password
 - user agent - change user agent to get flag
