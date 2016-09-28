@@ -2,9 +2,7 @@
 /*jslint esversion: 6 */
 'use strict';
 
-let sqlite3 = require('sqlite3');
-
-let db = new sqlite3.Database(__dirname + '/ctf.db');
+let db = require('./db').db;
 
 function getLeaderboard(req, res) {
   db.all('SELECT username, total_points AS points FROM leaderboard ORDER BY total_points DESC', function(err, data) {

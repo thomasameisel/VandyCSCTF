@@ -8,10 +8,12 @@ let logger = require('morgan');
 let session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 
-let adminRequests = require('./admin_requests');
+let admin = require('./admin');
 let auth = require('./auth');
 let challenges = require('./challenges');
 let points = require('./points');
+
+require('./first_run').firstRun();
 
 let app = express();
 app.use(express.static('public'));
@@ -43,17 +45,17 @@ app.get('/v1/leaderboard', points.getLeaderboard);
 
 app.get('/v1/points', points.getPoints);
 
-app.get('/v1/admin', adminRequests.getAdmin);
+app.get('/v1/admin', admin.getAdmin);
 
-app.get('/v1/admin/challenges', adminRequests.getChallenges);
+app.get('/v1/admin/challenges', admin.getChallenges);
 
-app.get('/v1/admin/challenge', adminRequests.getChallenge);
+app.get('/v1/admin/challenge', admin.getChallenge);
 
-app.post('/v1/admin/add_challenge', adminRequests.addChallenge);
+app.post('/v1/admin/add_challenge', admin.addChallenge);
 
-app.post('/v1/admin/edit_challenge', adminRequests.editChallenge);
+app.post('/v1/admin/edit_challenge', admin.editChallenge);
 
-app.post('/v1/admin/delete_challenge', adminRequests.deleteChallenge);
+app.post('/v1/admin/delete_challenge', admin.deleteChallenge);
 
 let server = app.listen(8080, function() {
   console.log('CTF server listening on ' + server.address().port);

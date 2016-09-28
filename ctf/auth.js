@@ -2,11 +2,9 @@
 /*jslint esversion: 6 */
 'use strict';
 
-let sqlite3 = require('sqlite3');
-
 let hash = require('./hash');
 
-let db = new sqlite3.Database(__dirname + '/ctf.db');
+let db = require('./db').db;
 
 function checkLoggedIn(req, res, cb) {
   if (!req.session.username) {
@@ -67,6 +65,7 @@ function signup(req, res) {
         req.session.admin = false;
         res.status(201).send({
           username: username,
+          is_admin: false,
           points: 0
         });
       }

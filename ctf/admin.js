@@ -3,11 +3,10 @@
 'use strict';
 
 let fs = require('fs');
-let sqlite3 = require('sqlite3');
 
 let checkAdmin = require('./auth.js').checkAdmin;
 
-let db = new sqlite3.Database(__dirname + '/ctf.db');
+let db = require('./db').db;
 
 function getAdmin(req, res) {
   checkAdmin(req, res, () => {
