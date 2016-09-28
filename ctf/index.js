@@ -33,6 +33,8 @@ app.post('/v1/flag', challenges.submitFlag);
 
 app.get('/v1/completed', challenges.getCompleted);
 
+app.get('/v1/all_completed', challenges.getAllCompleted);
+
 app.post('/v1/login', auth.login);
 
 app.post('/v1/signup', auth.signup);

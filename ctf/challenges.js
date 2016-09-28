@@ -59,7 +59,7 @@ function getCompleted(req, res) {
   let username = req.query.username;
   if (!username) res.status(400).send({ error: 'Must provide username' });
   else {
-    db.all('SELECT challenge_name, points, time_completed FROM completed, challenges WHERE completed.challenge_id = challenges.rowid AND username=?', username,
+    db.all('SELECT challenge_name, points, time_completed FROM completed, challenges WHERE completed.challenge_id = challenges.rowid AND username=? ORDER BY time_completed DESC', username,
       function(err, rows) {
         if (err) res.status(401).send({ error: 'Error with database' });
         else res.status(201).send({
@@ -70,9 +70,18 @@ function getCompleted(req, res) {
   }
 }
 
+function getAllCompleted(req, res) {
+  db.all('SELECT users.username AS username, challenge_name, points, time_completed FROM users NATURAL JOIN (completed JOIN challenges ON completed.challenge_id=challenges.ROWID) ORDER BY time_completed DESC',
+    function(err, rows) {
+      if (err) res.status(401).send({ error: 'Error with database' });
+      else res.status(201).send(rows);
+    });
+}
+
 module.exports = {
   getChallenges: getChallenges,
   getChallenge: getChallenge,
   submitFlag: submitFlag,
-  getCompleted: getCompleted
+  getCompleted: getCompleted,
+  getAllCompleted: getAllCompleted
 };
