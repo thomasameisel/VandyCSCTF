@@ -17,11 +17,23 @@ function goToMain() {
 }
 
 function goToLogin() {
-  loadFile('login.html');
+  loadFile('login.html', () => {
+    document.getElementById('login').onkeydown = function(event) {
+      if (event.keyCode == 13) {
+        submitLogin();
+      }
+    };
+  });
 }
 
 function goToSignup() {
-  loadFile('signup.html');
+  loadFile('signup.html', () => {
+    document.getElementById('login').onkeydown = function(event) {
+      if (event.keyCode == 13) {
+        submitSignup();
+      }
+    };
+  });
 }
 
 function goToChallenges() {

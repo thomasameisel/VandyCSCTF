@@ -1,21 +1,20 @@
 /*jslint esversion:6 */
 
+function createTableRow(data, username) {
+  let td = document.createElement('td');
+  td.innerHTML = data;
+  if (username === $('#profile_header').text()) td.style = 'font-weight:bold';
+  return td;
+}
+
 function addChallengesToCompletedList(challenges) {
   challenges.forEach(function(challenge) {
-    console.log(challenge);
     let tr = document.createElement('tr');
-    let teamNameTd = document.createElement('td');
-    teamNameTd.innerHTML = challenge.username;
-    tr.appendChild(teamNameTd);
-    let challengeNameTd = document.createElement('td');
-    challengeNameTd.innerHTML = challenge.challenge_name;
-    tr.appendChild(challengeNameTd);
-    let challengePointsTd = document.createElement('td');
-    challengePointsTd.innerHTML = challenge.points;
-    tr.appendChild(challengePointsTd);
-    let challengeTimeTd = document.createElement('td');
-    challengeTimeTd.innerHTML = unixTimeToRegular(challenge.time_completed);
-    tr.appendChild(challengeTimeTd);
+
+    tr.appendChild(createTableRow(challenge.username, challenge.username));
+    tr.appendChild(createTableRow(challenge.challenge_name, challenge.username));
+    tr.appendChild(createTableRow(challenge.points, challenge.username));
+    tr.appendChild(createTableRow(unixTimeToRegular(challenge.time_completed), challenge.username));
     document.getElementById('challenges_completed').appendChild(tr);
   });
 }
@@ -23,12 +22,9 @@ function addChallengesToCompletedList(challenges) {
 function addTeamsToList(teams) {
   teams.forEach(function(team) {
     let tr = document.createElement('tr');
-    let teamTd = document.createElement('td');
-    teamTd.innerHTML = team.username;
-    tr.appendChild(teamTd);
-    let pointsTd = document.createElement('td');
-    pointsTd.innerHTML = team.points;
-    tr.appendChild(pointsTd);
+
+    tr.appendChild(createTableRow(team.username, team.username));
+    tr.appendChild(createTableRow(team.points, team.username));
     document.getElementById('leaderboard').appendChild(tr);
   });
 }

@@ -24,7 +24,6 @@ function updateUsernamePoints(data) {
 function populateHeaderLoggedIn(data, redirectToChallenges) {
   setHeaderButtonsVisibility(true);
   updateUsernamePoints(data);
-  console.log(data);
   if (!data.is_admin) $('#admin_header').hide();
   else $('#admin_header').show();
   if (redirectToChallenges) goToChallenges();
