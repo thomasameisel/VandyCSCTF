@@ -1,8 +1,9 @@
 /*jslint esversion:6 */
 
-function loadFile(file) {
+function loadFile(file, cb) {
   $('#content').empty();
-  $('#content').load(file);
+  if (cb) $('#content').load(file, cb);
+  else $('#content').load(file);
 }
 
 function goToMain() {
@@ -18,11 +19,9 @@ function goToSignup() {
 }
 
 function goToChallenges() {
-  loadFile('challenges.html');
-  populateChallenges();
+  loadFile('challenges.html', populateChallenges);
 }
 
 function goToLeaderboard() {
-  loadFile('leaderboard.html');
-  populateLeaderboard();
+  loadFile('leaderboard.html', populateLeaderboard);
 }

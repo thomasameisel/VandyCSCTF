@@ -1,6 +1,6 @@
 /*jslint node: true */
 /*jslint esversion: 6 */
-"use strict";
+'use strict';
 
 let express = require('express');
 let bodyParser = require('body-parser');
@@ -24,56 +24,58 @@ app.use(session({
 
 let challengeDir = './challenges/';
 
+function checkLoggedIn(req, res, cb) {
+  if (!req.session.auth || !req.session.username) {
+    res.status(401).send({ error: 'Must be logged in' });
+  } else if (cb) cb();
+}
+
 app.get('/v1/challenges', function(req, res) {
-  let query = 'SELECT challenge_id, challenge_name, challenge_filename, points FROM';
-  if (req.session.auth && req.session.username) {
+  checkLoggedIn(req, res, () => {
     // if the user is signed in, only return the challenges that they have not completed yet
-    query += ' not_completed WHERE username=?';
-    db.all(query, req.session.username, function(err, data) {
-      if (err) res.status(401).send({ error: 'Error with database' });
-      else res.status(201).send(data);
-    });
-  } else {
-    query += ' challenges';
-    db.all(query, function(err, data) {
-      if (err) res.status(401).send({ error: 'Error with database' });
-      else res.status(201).send(data);
-    });
-  }
+    db.all('SELECT challenge_id, challenge_name, challenge_filename, points FROM not_completed WHERE username=?',
+      req.session.username,
+      function(err, data) {
+        if (err) res.status(401).send({ error: 'Error with database' });
+        else res.status(201).send(data);
+      });
+  });
 });
 
 app.get('/v1/challenge', function(req, res) {
-  let filename = req.query.filename;
-  if (!filename) res.status(400).send({ error: 'Must provide challenge fillename' });
-  else {
-    fs.readFile(challengeDir + filename, function(err, data) {
-      if (err) res.status(401).send({ error: 'Error with database' });
-      else res.status(201).send(data);
-    });
-  }
+  checkLoggedIn(req, res, () => {
+    let filename = req.query.filename;
+    if (!filename) res.status(400).send({ error: 'Must provide challenge fillename' });
+    else {
+      fs.readFile(challengeDir + filename, function(err, data) {
+        if (err) res.status(401).send({ error: 'Error with database' });
+        else res.status(201).send(data);
+      });
+    }
+  });
 });
 
 app.post('/v1/flag', function(req, res) {
-  let challengeId = req.body.challenge_id;
-  let flag = req.body.flag;
-  if (!req.session.auth || !req.session.username) {
-    res.status(400).send({ error: 'Not logged in' });
-  } else if (!challengeId || !flag) {
-    res.status(400).send({ error: 'Must provide challenge_id and flag' });
-  } else {
-    db.get('SELECT flag FROM challenges WHERE challenge_id=?', challengeId,
-      function(err, data) {
-        if (err) res.status(400).send({ error: 'Error with database' });
-        else if (!data || !data.flag) res.status(401).send({ error: 'challenge_id is not valid' });
-        else if (data.flag !== flag) res.status(401).send({ error: 'flag is not correct' });
-        else {
-          res.status(201).send({ msg: 'Correct answer!' });
-          let unixTime = Math.floor(new Date() / 1000);
-          db.run('INSERT OR IGNORE INTO completed (username, challenge_id, time_completed) ' +
-            'VALUES (?,?,?)', req.session.username, challengeId, unixTime);
-        }
-      });
-  }
+  checkLoggedIn(req, res, () => {
+    let challengeId = req.body.challenge_id;
+    let flag = req.body.flag;
+    if (!challengeId || !flag) {
+      res.status(400).send({ error: 'Must provide challenge_id and flag' });
+    } else {
+      db.get('SELECT flag FROM challenges WHERE challenge_id=?', challengeId,
+        function(err, data) {
+          if (err) res.status(400).send({ error: 'Error with database' });
+          else if (!data || !data.flag) res.status(401).send({ error: 'challenge_id is not valid' });
+          else if (data.flag !== flag) res.status(401).send({ error: 'flag is not correct' });
+          else {
+            res.status(201).send({ msg: 'Correct answer!' });
+            let unixTime = Math.floor(new Date() / 1000);
+            db.run('INSERT OR IGNORE INTO completed (username, challenge_id, time_completed) ' +
+              'VALUES (?,?,?)', req.session.username, challengeId, unixTime);
+          }
+        });
+    }
+  });
 });
 
 app.post('/v1/login', function(req, res) {
@@ -115,9 +117,7 @@ app.post('/v1/signup', function(req, res) {
 });
 
 app.get('/v1/auth', function(req, res) {
-  if (!req.session.auth || !req.session.username) {
-    res.status(401).send({ error: 'Not logged in' });
-  } else {
+  checkLoggedIn(req, res, () => {
     db.get('SELECT total_points FROM leaderboard WHERE username=?', req.session.username,
       function(err, data) {
         if (err) res.status(201).send({ username: req.session.username });
@@ -126,7 +126,7 @@ app.get('/v1/auth', function(req, res) {
           points: data.total_points
         });
       });
-  }
+  });
 });
 
 app.get('/v1/logout', function(req, res) {
@@ -157,6 +157,6 @@ app.get('/v1/points', function(req, res) {
   }
 });
 
-let server = app.listen(8080, function () {
+let server = app.listen(8080, function() {
   console.log('CTF server listening on ' + server.address().port);
 });
