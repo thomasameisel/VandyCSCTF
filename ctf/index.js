@@ -51,7 +51,7 @@ app.get('/v1/challenge', function(req, res) {
     let challenge_id = req.query.challenge_id;
     if (!challenge_id) res.status(400).send({ error: 'Must provide challenge_id' });
     else {
-      db.get('SELECT challenge_content FROM challenges WHERE challenge_id=?', challenge_id,
+      db.get('SELECT challenge_id, challenge_content FROM challenges WHERE challenge_id=?', challenge_id,
         function(err, data) {
           if (err) res.status(401).send({ error: 'Error with database' });
           else res.status(201).send(data);
@@ -89,14 +89,16 @@ app.post('/v1/login', function(req, res) {
   if (!username || !password) {
     res.status(400).send({ error: 'Must provide username and password' });
   } else {
-    db.get('SELECT total_points FROM users NATURAL JOIN leaderboard WHERE username=? AND password=?', username, password,
+    db.get('SELECT users.username, users.is_admin, total_points FROM users LEFT OUTER JOIN leaderboard ON users.username = leaderboard.username WHERE users.username=? AND password=?', username, password,
       function(err, data) {
         if (err) res.status(400).send({ error: 'Error with database' });
         else if (!data) res.status(401).send({ error: 'Username and password are incorrect' });
         else {
+          console.log(data);
           req.session.username = username;
-          req.session.admin = username === 'admin';
-          res.status(201).send({
+          req.session.admin = data.is_admin;
+          if (data.total_points === null) res.status(201).send({ username: username });
+          else res.status(201).send({
             username: username,
             points: data.total_points
           });
@@ -126,6 +128,7 @@ app.get('/v1/auth', function(req, res) {
     db.get('SELECT total_points FROM leaderboard WHERE username=?', req.session.username,
       function(err, data) {
         if (err) res.status(201).send({ username: req.session.username });
+        else if (!data) res.status(201).send({ username: req.session.username });
         else res.status(201).send({
           username: req.session.username,
           points: data.total_points

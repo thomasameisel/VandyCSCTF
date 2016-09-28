@@ -17,7 +17,7 @@ function addChallengeToContent(challenge) {
   challengeDiv.innerHTML +=
     '<form>\n' +
       '<input type="text" id="flag" />\n' +
-      '<input type="text" id="challenge_id" value="' + $('#id').text() + '" hidden />\n' +
+      '<input type="text" id="challenge_id" value="' + challenge.challenge_id + '" hidden />\n' +
       '<button type="button" onclick="submitFlag()">Submit</button>\n' +
     '</form>\n' +
     '<h5 id="response"></h5>\n';
