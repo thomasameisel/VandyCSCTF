@@ -32,6 +32,10 @@ function goToLeaderboard() {
   loadFile('leaderboard.html', populateLeaderboard);
 }
 
+function goToProfile() {
+  loadFile('profile.html', populateProfile);
+}
+
 function goToAdmin() {
   ajaxGet('/v1/admin',
     (data) => loadHTML(data, populateAdminChallenges),

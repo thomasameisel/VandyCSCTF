@@ -12,6 +12,7 @@
     <script type="text/javascript" src="js/challenges.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/leaderboard.js"></script>
+    <script type="text/javascript" src="js/profile.js"></script>
     <script type="text/javascript" src="js/admin.js"></script>
 </head>
 <body onload="changeHeader(); goToMain();">
@@ -30,7 +31,7 @@
                     <li><a id="signup_header" onclick="goToSignup()">Signup</a></li>
                     <li><a id="challenges_header" onclick="goToChallenges()">Challenges</a></li>
                     <li><p id="points_header" class="navbar-text"></p></li>
-                    <li><p id="profile_header" class="navbar-text"></p></li>
+                    <li><a id="profile_header" onclick="goToProfile()"></a></li>
                     <li><a id="logout_header" onclick="logout()">Logout</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->

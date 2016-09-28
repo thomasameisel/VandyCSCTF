@@ -37,7 +37,7 @@ function checkAdmin(req, res, cb) {
 app.get('/v1/challenges', function(req, res) {
   checkLoggedIn(req, res, () => {
     // only return the challenges the user has not completed yet
-    db.all('SELECT challenge_id, challenge_name, challenge_filename, points FROM not_completed WHERE username=?',
+    db.all('SELECT challenge_id, challenge_name, points FROM not_completed WHERE username=?',
       req.session.username,
       function(err, data) {
         if (err) res.status(401).send({ error: 'Error with database' });
@@ -51,7 +51,7 @@ app.get('/v1/challenge', function(req, res) {
     let challenge_id = req.query.challenge_id;
     if (!challenge_id) res.status(400).send({ error: 'Must provide challenge_id' });
     else {
-      db.get('SELECT challenge_id, challenge_content FROM challenges WHERE challenge_id=?', challenge_id,
+      db.get('SELECT rowid AS challenge_id, challenge_content FROM challenges WHERE rowid=?', challenge_id,
         function(err, data) {
           if (err) res.status(401).send({ error: 'Error with database' });
           else res.status(201).send(data);
@@ -62,12 +62,12 @@ app.get('/v1/challenge', function(req, res) {
 
 app.post('/v1/flag', function(req, res) {
   checkLoggedIn(req, res, () => {
-    let challengeId = req.body.challenge_id;
+    let challenge_id = req.body.challenge_id;
     let flag = req.body.flag;
-    if (!challengeId || !flag) {
+    if (!challenge_id || !flag) {
       res.status(400).send({ error: 'Must provide challenge_id and flag' });
     } else {
-      db.get('SELECT flag FROM challenges WHERE challenge_id=?', challengeId,
+      db.get('SELECT flag FROM challenges WHERE rowid=?', challenge_id,
         function(err, data) {
           if (err) res.status(400).send({ error: 'Error with database' });
           else if (!data || !data.flag) res.status(401).send({ error: 'challenge_id is not valid' });
@@ -76,7 +76,7 @@ app.post('/v1/flag', function(req, res) {
             res.status(201).send({ msg: 'Correct answer!' });
             let unixTime = Math.floor(new Date() / 1000);
             db.run('INSERT OR IGNORE INTO completed (username, challenge_id, time_completed) ' +
-              'VALUES (?,?,?)', req.session.username, challengeId, unixTime);
+              'VALUES (?,?,?)', req.session.username, challenge_id, unixTime);
           }
         });
     }
@@ -113,7 +113,7 @@ app.post('/v1/signup', function(req, res) {
   if (!username || !password) {
     res.status(400).send({ error: 'Must provide username and password' });
   } else {
-    db.run('INSERT INTO users VALUES (?,?)', username, password);
+    db.run('INSERT INTO users VALUES (?,?,0)', username, password);
     req.session.username = username;
     req.session.admin = false;
     res.status(201).send({
@@ -165,6 +165,21 @@ app.get('/v1/points', function(req, res) {
   }
 });
 
+app.get('/v1/completed', function(req, res) {
+  let username = req.query.username;
+  if (!username) res.status(400).send({ error: 'Must provide username' });
+  else {
+    db.all('SELECT challenge_name, points, time_completed FROM completed, challenges WHERE completed.challenge_id = challenges.rowid AND username=?', username,
+      function(err, rows) {
+        if (err) res.status(401).send({ error: 'Error with database' });
+        else res.status(201).send({
+          username: username,
+          completed: rows
+        });
+      });
+  }
+});
+
 app.get('/v1/admin', function(req, res) {
   checkAdmin(req, res, () => {
     fs.readFile('admin.html', function(err, data) {
@@ -179,7 +194,7 @@ app.get('/v1/admin/challenge', function(req, res) {
     let challenge_id = req.query.challenge_id;
     if (!challenge_id) res.status(400).send({ error: 'Must provide challenge_id' });
     else {
-      db.get('SELECT challenge_id, challenge_name, challenge_content, points, flag FROM challenges WHERE challenge_id=?', challenge_id,
+      db.get('SELECT rowid AS challenge_id, challenge_name, challenge_content, points, flag FROM challenges WHERE rowid=?', challenge_id,
         function(err, data) {
           if (err) res.status(401).send({ error: 'Error with database' });
           else res.status(201).send(data);
@@ -190,16 +205,15 @@ app.get('/v1/admin/challenge', function(req, res) {
 
 app.post('/v1/admin/add_challenge', function(req, res) {
   checkAdmin(req, res, () => {
-    let challenge_id = req.body.challenge_id;
     let challenge_name = req.body.challenge_name;
     let points = req.body.points;
     let flag = req.body.flag;
     let challenge_content = req.body.challenge_content;
-    if (!challenge_id || !challenge_name || !points || !flag || !challenge_content) {
+    if (!challenge_name || !points || !flag || !challenge_content) {
       res.status(401).send({ error: 'Must provide all information' });
     } else {
-      db.run('INSERT INTO challenges (challenge_id,challenge_name,challenge_filename,points,flag,challenge_content)' +
-        ' VALUES (?,?,"",?,?,?)', challenge_id, challenge_name, points, flag, challenge_content);
+      db.run('INSERT INTO challenges (challenge_name,points,flag,challenge_content)' +
+        ' VALUES (?,?,?,?)', challenge_name, points, flag, challenge_content);
       res.status(201).send('Challenge added');
     }
   });
@@ -216,7 +230,7 @@ app.post('/v1/admin/edit_challenge', function(req, res) {
       res.status(401).send({ error: 'Must provide all information' });
     } else {
       db.run('UPDATE challenges SET challenge_name=?, points=?, flag=?, challenge_content=?' +
-        ' WHERE challenge_id=?', challenge_name, points, flag, challenge_content, challenge_id);
+        ' WHERE rowid=?', challenge_name, points, flag, challenge_content, challenge_id);
       res.status(201).send('Challenge updated');
     }
   });
@@ -227,7 +241,7 @@ app.post('/v1/admin/delete_challenge', function(req, res) {
     let challenge_id = req.body.challenge_id;
     if (!challenge_id) res.status(401).send({ error: 'Must provide challenge_id' });
     else {
-      db.run('DELETE FROM challenges WHERE challenge_id=?', challenge_id);
+      db.run('DELETE FROM challenges WHERE rowid=?', challenge_id);
       res.status(201).send('Challenge deleted');
     }
   });
