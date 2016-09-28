@@ -8,7 +8,12 @@ function addChallengeToContent(challenge) {
   $('#challenge').empty();
 
   let challengeDiv = document.getElementById('challenge');
-  challengeDiv.innerHTML = challenge;
+  let challengeContent = challenge.challenge_content;
+  let lines = challengeContent.split("\n");
+  lines.forEach(function(line) {
+    if (line.length === 0) challengeDiv.innerHTML += '<br />';
+    else challengeDiv.innerHTML += '<p>' + line + '</p>';
+  });
   challengeDiv.innerHTML +=
     '<form>\n' +
       '<input type="text" id="flag" />\n' +
@@ -32,15 +37,15 @@ function addChallengesToList(challenges) {
       challenge.id = challenges[i].challenge_id;
       challenge.innerHTML = challenges[i].challenge_name + ' (' + challenges[i].points + ' points)';
       challenge.addEventListener('click', () => {
-        populateChallenge(challenges[i].challenge_filename);
+        populateChallenge(challenges[i].challenge_id);
       });
       document.getElementById('challenges').appendChild(challenge);
     }
   }
 }
 
-function populateChallenge(filename) {
-  ajaxGet('/v1/challenge?filename=' + filename,
+function populateChallenge(challengeId) {
+  ajaxGet('/v1/challenge?challenge_id=' + challengeId,
     addChallengeToContent,
     () => {});
 }

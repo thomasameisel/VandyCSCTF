@@ -22,17 +22,21 @@ app.use(session({
   secret: 'VandyCSCTFC0Mpetition'
 }));
 
-let challengeDir = './challenges/';
-
 function checkLoggedIn(req, res, cb) {
-  if (!req.session.auth || !req.session.username) {
+  if (!req.session.username) {
     res.status(401).send({ error: 'Must be logged in' });
+  } else if (cb) cb();
+}
+
+function checkAdmin(req, res, cb) {
+  if (!req.session.admin) {
+    res.status(401).send({ error: 'Not authorized' });
   } else if (cb) cb();
 }
 
 app.get('/v1/challenges', function(req, res) {
   checkLoggedIn(req, res, () => {
-    // if the user is signed in, only return the challenges that they have not completed yet
+    // only return the challenges the user has not completed yet
     db.all('SELECT challenge_id, challenge_name, challenge_filename, points FROM not_completed WHERE username=?',
       req.session.username,
       function(err, data) {
@@ -44,13 +48,14 @@ app.get('/v1/challenges', function(req, res) {
 
 app.get('/v1/challenge', function(req, res) {
   checkLoggedIn(req, res, () => {
-    let filename = req.query.filename;
-    if (!filename) res.status(400).send({ error: 'Must provide challenge fillename' });
+    let challenge_id = req.query.challenge_id;
+    if (!challenge_id) res.status(400).send({ error: 'Must provide challenge_id' });
     else {
-      fs.readFile(challengeDir + filename, function(err, data) {
-        if (err) res.status(401).send({ error: 'Error with database' });
-        else res.status(201).send(data);
-      });
+      db.get('SELECT challenge_content FROM challenges WHERE challenge_id=?', challenge_id,
+        function(err, data) {
+          if (err) res.status(401).send({ error: 'Error with database' });
+          else res.status(201).send(data);
+        });
     }
   });
 });
@@ -89,8 +94,8 @@ app.post('/v1/login', function(req, res) {
         if (err) res.status(400).send({ error: 'Error with database' });
         else if (!data) res.status(401).send({ error: 'Username and password are incorrect' });
         else {
-          req.session.auth = true;
           req.session.username = username;
+          req.session.admin = username === 'admin';
           res.status(201).send({
             username: username,
             points: data.total_points
@@ -108,7 +113,7 @@ app.post('/v1/signup', function(req, res) {
   } else {
     db.run('INSERT INTO users VALUES (?,?)', username, password);
     req.session.username = username;
-    req.session.auth = true;
+    req.session.admin = false;
     res.status(201).send({
       username: username,
       points: 0
@@ -130,7 +135,7 @@ app.get('/v1/auth', function(req, res) {
 });
 
 app.get('/v1/logout', function(req, res) {
-  req.session.auth = false;
+  req.session.admin = false;
   req.session.username = undefined;
   res.status(201).send();
 });
@@ -155,6 +160,74 @@ app.get('/v1/points', function(req, res) {
         });
       });
   }
+});
+
+app.get('/v1/admin', function(req, res) {
+  checkAdmin(req, res, () => {
+    fs.readFile('admin.html', function(err, data) {
+      if (err) res.status(401).send('Error occurred');
+      else res.status(201).send(data);
+    });
+  });
+});
+
+app.get('/v1/admin/challenge', function(req, res) {
+  checkAdmin(req, res, () => {
+    let challenge_id = req.query.challenge_id;
+    if (!challenge_id) res.status(400).send({ error: 'Must provide challenge_id' });
+    else {
+      db.get('SELECT challenge_id, challenge_name, challenge_content, points, flag FROM challenges WHERE challenge_id=?', challenge_id,
+        function(err, data) {
+          if (err) res.status(401).send({ error: 'Error with database' });
+          else res.status(201).send(data);
+        });
+    }
+  });
+});
+
+app.post('/v1/admin/add_challenge', function(req, res) {
+  checkAdmin(req, res, () => {
+    let challenge_id = req.body.challenge_id;
+    let challenge_name = req.body.challenge_name;
+    let points = req.body.points;
+    let flag = req.body.flag;
+    let challenge_content = req.body.challenge_content;
+    if (!challenge_id || !challenge_name || !points || !flag || !challenge_content) {
+      res.status(401).send({ error: 'Must provide all information' });
+    } else {
+      db.run('INSERT INTO challenges (challenge_id,challenge_name,challenge_filename,points,flag,challenge_content)' +
+        ' VALUES (?,?,"",?,?,?)', challenge_id, challenge_name, points, flag, challenge_content);
+      res.status(201).send('Challenge added');
+    }
+  });
+});
+
+app.post('/v1/admin/edit_challenge', function(req, res) {
+  checkAdmin(req, res, () => {
+    let challenge_id = req.body.challenge_id;
+    let challenge_name = req.body.challenge_name;
+    let points = req.body.points;
+    let flag = req.body.flag;
+    let challenge_content = req.body.challenge_content;
+    if (!challenge_id || !challenge_name || !points || !flag || !challenge_content) {
+      res.status(401).send({ error: 'Must provide all information' });
+    } else {
+      db.run('UPDATE challenges SET challenge_name=?, points=?, flag=?, challenge_content=?' +
+        ' WHERE challenge_id=?', challenge_name, points, flag, challenge_content, challenge_id);
+      res.status(201).send('Challenge updated');
+    }
+  });
+});
+
+app.post('/v1/admin/delete_challenge', function(req, res) {
+  checkAdmin(req, res, () => {
+    let challenge_id = req.body.challenge_id;
+    if (!challenge_id) res.status(401).send({ error: 'Must provide challenge_id' });
+    else {
+      db.run('DELETE FROM challenges WHERE challenge_id=?', challenge_id);
+      res.status(201).send('Challenge deleted');
+    }
+  });
 });
 
 let server = app.listen(8080, function() {

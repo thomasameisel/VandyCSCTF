@@ -6,6 +6,12 @@ function loadFile(file, cb) {
   else $('#content').load(file);
 }
 
+function loadHTML(file, cb) {
+  $('#content').empty();
+  $('#content').html(file);
+  if (cb) cb();
+}
+
 function goToMain() {
   loadFile('main.html');
 }
@@ -24,4 +30,10 @@ function goToChallenges() {
 
 function goToLeaderboard() {
   loadFile('leaderboard.html', populateLeaderboard);
+}
+
+function goToAdmin() {
+  ajaxGet('/v1/admin',
+    (data) => loadHTML(data, populateAdminChallenges),
+    (data) => loadHTML(data.responseText));
 }

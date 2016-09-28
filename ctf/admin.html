@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<h1 class="center">Admin</h1>
+<div class="col-md-offset-1 col-md-4">
+    <h3>Challenges</h3>
+    <div id="challenges">
+    </div>
+    <br />
+    <button type="button" class="btn btn-default" onclick="showAddChallenge()">Add challenge</button>
+</div>
+<div class="col-md-5">
+    <h3 id="add_edit_challenge">Add Challenge</h3>
+
+    <form id="add_challenge" class="form-horizontal">
+        <div class="form-group">
+            <input type="text" class="form-control" id="challenge_name" placeholder="Challenge name">
+        </div>
+        <div class="form-group">
+            <input type="number" class="form-control" id="challenge_id" placeholder="Challenge ID">
+        </div>
+        <div class="form-group">
+            <textarea type="text" class="form-control" id="challenge_content" placeholder="Challenge content" style="height:200px"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="number" class="form-control" id="points" placeholder="Points">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="flag" placeholder="Flag">
+        </div>
+
+        <div class="form-group">
+            <button id="challenge_update" type="button" onclick="addChallenge()" class="btn btn-default">Add challenge</button>
+            <button id="challenge_remove" type="button" onclick="deleteChallenge()" class="btn btn-danger" style="display:none">Remove challenge</button>
+        </div>
+
+        <div class="form-group">
+            <div id="admin_response">
+            </div>
+        </div>
+    </form>
+</div>

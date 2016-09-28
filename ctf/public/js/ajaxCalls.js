@@ -1,5 +1,13 @@
 /*jslint esversion:6 */
 
+function inputToJSON() {
+  let json = {};
+  $('input').each(function() {
+    if (this.value) json[this.id] = this.value;
+  });
+  return json;
+}
+
 function ajaxPost(url, jsonData, onSuccess, onError) {
   $.ajax({
     url: url,

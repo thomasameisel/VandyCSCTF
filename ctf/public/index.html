@@ -12,6 +12,7 @@
     <script type="text/javascript" src="js/challenges.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/leaderboard.js"></script>
+    <script type="text/javascript" src="js/admin.js"></script>
 </head>
 <body onload="changeHeader(); goToMain();">
     <nav class="navbar navbar-default">
@@ -23,6 +24,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a id="admin_header" onclick="goToAdmin()">Admin</a></li>
                     <li><a id="leaderboard_header" onclick="goToLeaderboard()">Leaderboard</a></li>
                     <li><a id="login_header" onclick="goToLogin()">Login</a></li>
                     <li><a id="signup_header" onclick="goToSignup()">Signup</a></li>

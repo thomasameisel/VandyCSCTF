@@ -2,7 +2,7 @@
 
 function setHeaderButtonsVisibility(loggedIn) {
   let loggedInBtns = [
-    'challenges_header', 'logout_header', 'profile_header', 'points_header'
+    'challenges_header', 'logout_header', 'profile_header', 'points_header', 'admin_header'
   ];
   let loggedOutBtns = [
     'login_header', 'signup_header'
@@ -24,6 +24,7 @@ function updateUsernamePoints(data) {
 function populateHeaderLoggedIn(data, redirectToChallenges) {
   setHeaderButtonsVisibility(true);
   updateUsernamePoints(data);
+  if (data.username !== 'admin') $('#admin_header').hide();
   if (redirectToChallenges) goToChallenges();
 }
 

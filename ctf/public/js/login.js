@@ -4,14 +4,6 @@ function displayError() {
   $('#invalid-msg').css('display', 'inline');
 }
 
-function inputToJSON() {
-  let json = {};
-  $('input').each(function() {
-    if (this.value) json[this.id] = this.value;
-  });
-  return json;
-}
-
 function changeError(msg) {
   displayError();
   let responseText = JSON.parse(msg.responseText);
