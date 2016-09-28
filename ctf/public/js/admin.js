@@ -13,7 +13,6 @@ function showAddChallenge() {
   $('#admin_response').text('');
   $('#challenge_remove').hide();
 
-  $('#challenge_id').prop('disabled', false);
   $('#add_edit_challenge').text('Add Challenge');
   $('#challenge_update').text('Add challenge');
   $('#challenge_update').attr('onclick', 'addChallenge()');
@@ -28,7 +27,6 @@ function addAdminChallengeToContent(challenge) {
   $('#admin_response').text('');
   $('#challenge_remove').show();
 
-  $('#challenge_id').prop('disabled', true);
   $('#add_edit_challenge').text('Edit Challenge');
   $('#challenge_update').text('Update challenge');
   $('#challenge_update').attr('onclick', 'editChallenge()');
@@ -56,7 +54,7 @@ function populateAdminChallenge(challengeId) {
 }
 
 function populateAdminChallenges() {
-  ajaxGet('/v1/challenges',
+  ajaxGet('/v1/admin/challenges',
     addAdminChallengesToList,
     () => {});
 }

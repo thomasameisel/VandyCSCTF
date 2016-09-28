@@ -189,6 +189,16 @@ app.get('/v1/admin', function(req, res) {
   });
 });
 
+app.get('/v1/admin/challenges', function(req, res) {
+  checkAdmin(req, res, () => {
+    db.all('SELECT rowid AS challenge_id, challenge_name, points FROM challenges',
+      function(err, data) {
+        if (err) res.status(401).send({ error: 'Error with database' });
+        else res.status(201).send(data);
+      });
+  });
+});
+
 app.get('/v1/admin/challenge', function(req, res) {
   checkAdmin(req, res, () => {
     let challenge_id = req.query.challenge_id;
