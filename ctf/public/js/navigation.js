@@ -18,7 +18,7 @@ function goToMain() {
 
 function headerBold(name) {
   $('#navbar').find('a').css('font-weight', 'normal');
-  document.getElementById(name + '_header').style = 'font-weight:bold';
+  document.getElementById(name + '_header').style['font-weight'] = 'bold';
 }
 
 function goToLogin() {
@@ -60,7 +60,5 @@ function goToProfile() {
 
 function goToAdmin() {
   headerBold('admin');
-  ajaxGet('/v1/admin',
-    (data) => loadHTML(data, populateAdminChallenges),
-    (data) => loadHTML(data.responseText));
+  loadFile('admin.html', populateAdminChallenges);
 }

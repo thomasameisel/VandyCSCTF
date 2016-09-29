@@ -4,7 +4,7 @@ function createTableRow(data, username) {
   let td = document.createElement('td');
   td.innerHTML = data;
   if (username && username === $('#profile_header').text()) {
-    td.style = 'font-weight:bold';
+    td.style['font-weight'] = 'bold';
   }
   return td;
 }
@@ -35,14 +35,14 @@ function addChallengesToList(challenges, onclick) {
 
   challenges.forEach(function(challenge) {
     let challengeEl = document.createElement('a');
-    challengeEl.style = 'display:block';
+    challengeEl.style.display = 'block';
     challengeEl.id = challenge.challenge_id;
     challengeEl.innerHTML = challenge.challenge_name + ' (' + challenge.points + ' points)';
     challengeEl.addEventListener('click', () => {
       $('#challenges').children('a').each(function() {
-        this.style = 'display:block';
+        this.style['font-weight'] = 'normal';
       });
-      challengeEl.style = 'display:block; font-weight:bold';
+      challengeEl.style['font-weight'] = 'bold';
       onclick(challenge.challenge_id);
     });
     document.getElementById('challenges').appendChild(challengeEl);
