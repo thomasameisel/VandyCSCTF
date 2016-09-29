@@ -1,13 +1,14 @@
 /*jslint esversion:6 */
 
 function addTeamsToList(teams) {
+  let tmp = '';
   teams.forEach(function(team) {
-    let tr = document.createElement('tr');
-
-    tr.appendChild(createTableRow(team.username, team.username));
-    tr.appendChild(createTableRow(team.points, team.username));
-    document.getElementById('leaderboard').appendChild(tr);
+    tmp += '<tr>';
+    tmp += createTableRow(team.username, team.username);
+    tmp += createTableRow(team.points, team.username);
+    tmp += '</tr>';
   });
+  $('#leaderboard').append(tmp);
 }
 
 function populateLeaderboard() {

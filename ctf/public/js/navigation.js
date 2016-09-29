@@ -6,12 +6,6 @@ function loadFile(file, cb) {
   else $('#content').load(file);
 }
 
-function loadHTML(file, cb) {
-  $('#content').empty();
-  $('#content').html(file);
-  if (cb) cb();
-}
-
 function headerBold(name) {
   $('#navbar').find('a').css('font-weight', 'normal');
   document.getElementById(name + '_header').style['font-weight'] = 'bold';

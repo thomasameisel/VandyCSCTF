@@ -2,12 +2,11 @@
 /*jslint esversion: 6 */
 'use strict';
 
-let sqlite3 = require('sqlite3');
 let prompt = require('prompt');
 
 let hash = require('./hash');
 
-let db = new sqlite3.Database(__dirname + '/ctf2.db');
+let db = require('./db').db;
 db.run('CREATE TABLE IF NOT EXISTS users (username text, hash text, is_admin boolean)');
 db.run('CREATE TABLE IF NOT EXISTS completed (username text, challenge_id int, time_completed int)');
 db.run('CREATE TABLE IF NOT EXISTS challenges (challenge_name text, points int, flag text, challenge_content text)');

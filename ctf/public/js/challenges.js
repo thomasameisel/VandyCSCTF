@@ -13,10 +13,12 @@ function addChallengeToContent(challenge) {
   let challengeDiv = document.getElementById('challenge');
   let challengeContent = challenge.challenge_content;
   let lines = challengeContent.split("\n");
+  let tmp = '';
   lines.forEach(function(line) {
-    if (line.length === 0) challengeDiv.innerHTML += '<br />';
-    else challengeDiv.innerHTML += '<p>' + line + '</p>';
+    if (line.length === 0) tmp += '<br />';
+    else tmp += '<p>' + line + '</p>';
   });
+  challengeDiv.innerHTML = tmp;
   $('#challenge_id').val(challenge.challenge_id);
 }
 

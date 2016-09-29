@@ -28,18 +28,6 @@
     z-index: 2;
 }
 
-.input {
-    margin-bottom: 5px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-
-.last-input {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-
 .error-message {
     display: none;
     color: red;

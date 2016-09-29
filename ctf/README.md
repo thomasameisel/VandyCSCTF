@@ -3,7 +3,7 @@
 Uses Node.js and SQLite
 
 ### First Run
-Run "npm start" in the repo's root directory. This will create two db files - one for sessions (sessions.db) and one for the ctf competition (ctf.db).
+Run "npm install" then "npm start" in the repo's root directory. The server runs on the 8080 port. It will create two db files - one for sessions (sessions.db) and one for the CTF competition (ctf.db).
 
 
 On first run, the program will prompt you to create an admin account. When logged in using this account, you can add, edit, and delete challenges using the "Admin" tab.

@@ -1,11 +1,11 @@
 /*jslint esversion:6 */
 
 function createTableRow(data, username) {
-  let td = document.createElement('td');
-  td.innerHTML = data;
+  let td = '<td';
   if (username && username === $('#profile_header').text()) {
-    td.style['font-weight'] = 'bold';
+    td += ' style="font-weight:bold"';
   }
+  td += '>' + data + '</td>';
   return td;
 }
 
@@ -19,33 +19,35 @@ function addChallengesToCompleted(challenges) {
     noneYet.innerHTML = 'None yet!';
     document.getElementById('challenges_completed').appendChild(noneYet);
   } else {
+    let tmp = '';
     challenges.forEach(function(challenge) {
-      let tr = document.createElement('tr');
-
-      if (challenge.username) tr.appendChild(createTableRow(challenge.username, challenge.username));
-      tr.appendChild(createTableRow(challenge.challenge_name, challenge.username));
-      tr.appendChild(createTableRow(challenge.points, challenge.username));
-      tr.appendChild(createTableRow(unixTimeToRegular(challenge.time_completed), challenge.username));
-      document.getElementById('challenges_completed').appendChild(tr);
+      tmp += '<tr>';
+      if (challenge.username) tmp += createTableRow(challenge.username, challenge.username);
+      tmp += createTableRow(challenge.challenge_name, challenge.username);
+      tmp += createTableRow(challenge.points, challenge.username);
+      tmp += createTableRow(unixTimeToRegular(challenge.time_completed), challenge.username);
+      tmp += '</tr>';
     });
+    $('#challenges_completed').append(tmp);
   }
 }
 
 function addChallengesToList(challenges, onclick) {
   $('#challenges').empty();
 
+  let tmp = '';
   challenges.forEach(function(challenge) {
-    let challengeEl = document.createElement('a');
-    challengeEl.style.display = 'block';
-    challengeEl.id = challenge.challenge_id;
-    challengeEl.innerHTML = challenge.challenge_name + ' (' + challenge.points + ' points)';
-    challengeEl.addEventListener('click', () => {
-      $('#challenges').children('a').each(function() {
-        this.style['font-weight'] = 'normal';
-      });
-      challengeEl.style['font-weight'] = 'bold';
-      onclick(challenge.challenge_id);
+    tmp += '<a style="display:block" ';
+    tmp += 'id="' + challenge.challenge_id + '" ';
+    tmp += '>' + challenge.challenge_name + ' (' + challenge.points + ' points)</a>';
+  });
+  $('#challenges').append(tmp);
+  
+  $('#challenges').on('click', 'a', function() {
+    $('#challenges').children('a').each(function() {
+      this.style['font-weight'] = 'normal';
     });
-    document.getElementById('challenges').appendChild(challengeEl);
+    $(this).css('font-weight', 'bold');
+    onclick($(this).attr('id'));
   });
 }
