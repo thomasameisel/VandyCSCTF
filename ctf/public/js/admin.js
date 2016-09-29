@@ -32,30 +32,15 @@ function addAdminChallengeToContent(challenge) {
   $('#challenge_update').attr('onclick', 'editChallenge()');
 }
 
-function addAdminChallengesToList(challenges) {
-  $('#challenges').empty();
-
-  for (let i = 0; i < challenges.length; ++i) {
-    let challenge = document.createElement('a');
-    challenge.style = 'display:block';
-    challenge.id = challenges[i].challenge_id;
-    challenge.innerHTML = challenges[i].challenge_name + ' (' + challenges[i].points + ' points)';
-    challenge.addEventListener('click', () => {
-      populateAdminChallenge(challenges[i].challenge_id);
-    });
-    document.getElementById('challenges').appendChild(challenge);
-  }
-}
-
-function populateAdminChallenge(challengeId) {
-  ajaxGet('/v1/admin/challenge?challenge_id=' + challengeId,
+function populateAdminChallenge(challenge_id) {
+  ajaxGet('/v1/admin/challenge?challenge_id=' + challenge_id,
     addAdminChallengeToContent,
     () => {});
 }
 
 function populateAdminChallenges() {
   ajaxGet('/v1/admin/challenges',
-    addAdminChallengesToList,
+    (data) => addChallengesToList(data, populateAdminChallenge),
     () => {});
 }
 

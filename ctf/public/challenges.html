@@ -8,5 +8,16 @@
     </div>
 </div>
 <div class="col-md-5">
-    <h3 id="challenge"></h3>
+    <h3 id="challenge">
+    </h3>
+    <form id="submit" style="display:none">
+        <div class="input-group">
+            <input type="text" id="flag" placeholder="Flag" class="form-control">
+            <input type="text" id="challenge_id" hidden />
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onclick="submitFlag()">Submit</button>
+            </span>
+        </div>
+    </form>
+    <h5 id="response"></h5>
 </div>

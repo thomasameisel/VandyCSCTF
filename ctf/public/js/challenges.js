@@ -6,6 +6,7 @@ function changeResponse(msg) {
 
 function addChallengeToContent(challenge) {
   $('#challenge').empty();
+  $('#submit').show();
 
   let challengeDiv = document.getElementById('challenge');
   let challengeContent = challenge.challenge_content;
@@ -14,16 +15,10 @@ function addChallengeToContent(challenge) {
     if (line.length === 0) challengeDiv.innerHTML += '<br />';
     else challengeDiv.innerHTML += '<p>' + line + '</p>';
   });
-  challengeDiv.innerHTML +=
-    '<form>\n' +
-      '<input type="text" id="flag" />\n' +
-      '<input type="text" id="challenge_id" value="' + challenge.challenge_id + '" hidden />\n' +
-      '<button type="button" onclick="submitFlag()">Submit</button>\n' +
-    '</form>\n' +
-    '<h5 id="response"></h5>\n';
+  $('#challenge_id').val(challenge.challenge_id);
 }
 
-function addChallengesToList(challenges) {
+function addChallengesToChallengesList(challenges) {
   $('#challenges').empty();
 
   if (challenges.length === 0) {
@@ -31,16 +26,7 @@ function addChallengesToList(challenges) {
     allDone.innerHTML = 'All done!';
     document.getElementById('challenges').appendChild(allDone);
   } else {
-    for (let i = 0; i < challenges.length; ++i) {
-      let challenge = document.createElement('a');
-      challenge.style = 'display:block';
-      challenge.id = challenges[i].challenge_id;
-      challenge.innerHTML = challenges[i].challenge_name + ' (' + challenges[i].points + ' points)';
-      challenge.addEventListener('click', () => {
-        populateChallenge(challenges[i].challenge_id);
-      });
-      document.getElementById('challenges').appendChild(challenge);
-    }
+    addChallengesToList(challenges, populateChallenge);
   }
 }
 
@@ -52,7 +38,7 @@ function populateChallenge(challengeId) {
 
 function populateChallenges() {
   ajaxGet('/v1/challenges',
-    addChallengesToList,
+    addChallengesToChallengesList,
     () => {});
 }
 
