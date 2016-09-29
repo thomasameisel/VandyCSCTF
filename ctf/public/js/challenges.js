@@ -6,6 +6,8 @@ function changeResponse(msg) {
 
 function addChallengeToContent(challenge) {
   $('#challenge').empty();
+  $('#response').text('');
+  $('#flag').val('');
   $('#submit').show();
 
   let challengeDiv = document.getElementById('challenge');

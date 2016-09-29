@@ -16,6 +16,9 @@ function showAddChallenge() {
   $('#add_edit_challenge').text('Add Challenge');
   $('#challenge_update').text('Add challenge');
   $('#challenge_update').attr('onclick', 'addChallenge()');
+  $('#challenges').children('a').each(function() {
+    this.style['font-weight'] = 'normal';
+  });
 }
 
 function addAdminChallengeToContent(challenge) {

@@ -12,13 +12,14 @@ function loadHTML(file, cb) {
   if (cb) cb();
 }
 
-function goToMain() {
-  loadFile('main.html');
-}
-
 function headerBold(name) {
   $('#navbar').find('a').css('font-weight', 'normal');
   document.getElementById(name + '_header').style['font-weight'] = 'bold';
+}
+
+function goToMain() {
+  $('#navbar').find('a').css('font-weight', 'normal');
+  loadFile('main.html');
 }
 
 function goToLogin() {

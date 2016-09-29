@@ -18,16 +18,17 @@ function addChallengesToCompleted(challenges) {
     let noneYet = document.createElement('p');
     noneYet.innerHTML = 'None yet!';
     document.getElementById('challenges_completed').appendChild(noneYet);
-  }
-  challenges.forEach(function(challenge) {
-    let tr = document.createElement('tr');
+  } else {
+    challenges.forEach(function(challenge) {
+      let tr = document.createElement('tr');
 
-    if (challenge.username) tr.appendChild(createTableRow(challenge.username, challenge.username));
-    tr.appendChild(createTableRow(challenge.challenge_name, challenge.username));
-    tr.appendChild(createTableRow(challenge.points, challenge.username));
-    tr.appendChild(createTableRow(unixTimeToRegular(challenge.time_completed, challenge.username)));
-    document.getElementById('challenges_completed').appendChild(tr);
-  });
+      if (challenge.username) tr.appendChild(createTableRow(challenge.username, challenge.username));
+      tr.appendChild(createTableRow(challenge.challenge_name, challenge.username));
+      tr.appendChild(createTableRow(challenge.points, challenge.username));
+      tr.appendChild(createTableRow(unixTimeToRegular(challenge.time_completed), challenge.username));
+      document.getElementById('challenges_completed').appendChild(tr);
+    });
+  }
 }
 
 function addChallengesToList(challenges, onclick) {
