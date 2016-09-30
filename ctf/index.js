@@ -26,7 +26,7 @@ app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   store: new SQLiteStore,
-  secret: 'VandyCSCTFC0Mpetition',
+  secret: 'CTFC0Mpetition',
   resave: false,
   saveUninitialized: false
 }));
