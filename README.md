@@ -17,12 +17,12 @@
   - Don't want to use this one
 - php echo name - user can use passthru injection to navigate to the flag.txt
   - Include source code
+- hidden input - change hidden input in form
 
 #### Needs to be done:
 - Storage has to be implemented for the php challenge
 
 #### Ideas:
-- hidden input - change hidden input in form
 - images - flag hidden in image
 - pdf - flag hidden behind pdf
 - client side encryption
