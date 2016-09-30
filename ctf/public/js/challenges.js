@@ -48,7 +48,8 @@ function populateChallenges() {
 
 function submitFlag() {
   let inputs = inputToJSON();
-  if (inputs.flag && inputs.flag.length > 0) {
+  if (!inputs.flag || inputs.flag.length === 0) changeResponse('Must provide flag');
+  else {
     ajaxPost('/v1/flag', inputs,
       (data) => {
         changeResponse(data.msg);
@@ -56,7 +57,5 @@ function submitFlag() {
         updatePoints();
       },
       (data) => changeResponse(JSON.parse(data.responseText).error));
-  } else {
-    changeResponse('Must supply challenge_id and flag');
   }
 }

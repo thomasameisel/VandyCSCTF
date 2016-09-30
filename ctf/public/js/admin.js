@@ -11,8 +11,10 @@ function showAddChallenge() {
   $('#points').val('');
   $('#flag').val('');
   $('#admin_response').text('');
-  $('#challenge_remove').hide();
+  $('#challenge_delete').hide();
 
+  $('#challenge_update').prop('disabled', false);
+  $('#challenge_delete').prop('disabled', false);
   $('#add_edit_challenge').text('Add Challenge');
   $('#challenge_update').text('Add challenge');
   $('#challenge_update').attr('onclick', 'addChallenge()');
@@ -28,8 +30,10 @@ function addAdminChallengeToContent(challenge) {
   $('#points').val(challenge.points);
   $('#flag').val(challenge.flag);
   $('#admin_response').text('');
-  $('#challenge_remove').show();
+  $('#challenge_delete').show();
 
+  $('#challenge_update').prop('disabled', false);
+  $('#challenge_delete').prop('disabled', false);
   $('#add_edit_challenge').text('Edit Challenge');
   $('#challenge_update').text('Update challenge');
   $('#challenge_update').attr('onclick', 'editChallenge()');
@@ -60,7 +64,11 @@ function updateChallenge(url, onSuccess) {
 }
 
 function deleteChallenge() {
-  updateChallenge('/v1/admin/delete_challenge', populateAdminChallenges);
+  updateChallenge('/v1/admin/delete_challenge', () => {
+    $('#challenge_update').prop('disabled', true);
+    $('#challenge_delete').prop('disabled', true);
+    populateAdminChallenges();
+  });
 }
 
 function editChallenge() {

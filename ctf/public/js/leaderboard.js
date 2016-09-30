@@ -16,7 +16,7 @@ function populateLeaderboard() {
     addTeamsToList,
     () => {});
 
-  ajaxGet('/v1/all_completed',
-    addChallengesToCompleted,
-    () => {});
+  // ajaxGet('/v1/all_completed',
+  //   addChallengesToCompleted,
+  //   () => {});
 }

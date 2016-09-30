@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <h1 class="center">Admin</h1>
 <div class="col-md-offset-1 col-md-4">
     <h3>Challenges</h3>
@@ -30,7 +32,7 @@
 
         <div class="form-group">
             <button id="challenge_update" type="button" onclick="addChallenge()" class="btn btn-default">Add challenge</button>
-            <button id="challenge_remove" type="button" onclick="deleteChallenge()" class="btn btn-danger" style="display:none">Remove challenge</button>
+            <button id="challenge_delete" type="button" data-toggle="modal" data-target="#delete_challenge_modal" class="btn btn-danger" style="display:none">Delete challenge</button>
         </div>
 
         <div class="form-group">
@@ -38,4 +40,19 @@
             </div>
         </div>
     </form>
+
+    <div class="modal fade" id="delete_challenge_modal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Are you sure you want to delete the challenge?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteChallenge()">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

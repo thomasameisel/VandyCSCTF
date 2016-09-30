@@ -36,9 +36,9 @@ function submitFlag(req, res) {
   checkLoggedIn(req, res, () => {
     let challenge_id = req.body.challenge_id;
     let flag = req.body.flag;
-    if (!challenge_id || !flag) {
-      res.status(400).send({ error: 'Must provide challenge_id and flag' });
-    } else {
+    if (!challenge_id) res.status(400).send({ error: 'Must provide challenge_id' });
+    else if (!flag) res.status(400).send({ error: 'Must provide flag' });
+    else {
       db.get('SELECT flag FROM challenges WHERE rowid=?', challenge_id,
         function(err, data) {
           if (err) res.status(400).send({ error: 'Error with database' });

@@ -17,12 +17,14 @@ require('./first_run').firstRun();
 
 let app = express();
 app.use(express.static('public'));
-app.use(logger('combined'));
+app.use(logger('dev'));
 app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   store: new SQLiteStore,
-  secret: 'VandyCSCTFC0Mpetition'
+  secret: 'VandyCSCTFC0Mpetition',
+  resave: false,
+  saveUninitialized: false
 }));
 
 app.get('/v1/challenges', challenges.getChallenges);

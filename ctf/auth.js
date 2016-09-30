@@ -57,16 +57,22 @@ function signup(req, res) {
   if (!username || !password) {
     res.status(400).send({ error: 'Must provide username and password' });
   } else {
-    hash.hashPassword(password, (err, hash) => {
+    db.get('SELECT username FROM users WHERE username=?', username, (err, data) => {
       if (err) res.status(401).send({ error: 'Error occurred' });
+      else if (data) res.status(401).send({ error: 'Username already exists' });
       else {
-        db.run('INSERT INTO users VALUES (?,?,0)', username, hash);
-        req.session.username = username;
-        req.session.admin = false;
-        res.status(201).send({
-          username: username,
-          is_admin: false,
-          points: 0
+        hash.hashPassword(password, (err, hash) => {
+          if (err) res.status(401).send({ error: 'Error occurred' });
+          else {
+            db.run('INSERT INTO users VALUES (?,?,0)', username, hash);
+            req.session.username = username;
+            req.session.admin = false;
+            res.status(201).send({
+              username: username,
+              is_admin: false,
+              points: 0
+            });
+          }
         });
       }
     });
