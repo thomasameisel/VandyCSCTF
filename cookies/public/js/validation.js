@@ -1,9 +1,4 @@
-/*jslint node: true */
 /*jslint esversion: 6 */
-/*globals $:false */
-/*globals window:false */
-/*globals document:false */
-'use strict';
 
 function getCookie(c_name) {
   if (document.cookie.length > 0) {

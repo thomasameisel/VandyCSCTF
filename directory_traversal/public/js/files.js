@@ -1,8 +1,4 @@
-/*jslint node: true */
 /*jslint esversion: 6 */
-/*globals $:false */
-/*globals window:false */
-'use strict';
 
 let dir = '';
 

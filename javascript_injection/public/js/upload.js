@@ -1,10 +1,4 @@
-/*jslint node: true */
 /*jslint esversion: 6 */
-/*globals $:false */
-/*globals window:false */
-/*globals document:false */
-/*globals FileReader:false */
-'use strict';
 
 function ajaxPost(url, jsonData, onSuccess, onError) {
   $.ajax({

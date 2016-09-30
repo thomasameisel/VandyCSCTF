@@ -15,6 +15,7 @@ There are several tabs that are available for CTF participants:
   - View the leaderboard and the challenges completed
 - Challenges
   - View and submit challenges
+  - Challenges are ordered by points
 - Profile
   - View challenges completed by your team
 - Logout

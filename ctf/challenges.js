@@ -9,7 +9,7 @@ let checkLoggedIn = require('./auth.js').checkLoggedIn;
 function getChallenges(req, res) {
   checkLoggedIn(req, res, () => {
     // only return the challenges the user has not completed yet
-    db.all('SELECT challenge_id, challenge_name, points FROM not_completed WHERE username=?',
+    db.all('SELECT challenge_id, challenge_name, points FROM not_completed WHERE username=? ORDER BY points ASC',
       req.session.username,
       function(err, data) {
         if (err) res.status(401).send({ error: 'Error with database' });

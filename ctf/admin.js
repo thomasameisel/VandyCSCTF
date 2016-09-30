@@ -19,7 +19,7 @@ function getAdmin(req, res) {
 
 function getChallenges(req, res) {
   checkAdmin(req, res, () => {
-    db.all('SELECT rowid AS challenge_id, challenge_name, points FROM challenges',
+    db.all('SELECT rowid AS challenge_id, challenge_name, points FROM challenges ORDER BY points ASC',
       function(err, data) {
         if (err) res.status(401).send({ error: 'Error with database' });
         else res.status(201).send(data);
