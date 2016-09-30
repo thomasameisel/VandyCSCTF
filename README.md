@@ -18,6 +18,8 @@
 - php echo name - user can use passthru injection to navigate to the flag.txt
   - Include source code
 - hidden input - change hidden input in form
+- caesar - caesar cipher to decrypt text
+- edit source code - edit css code to reveal flag
 
 #### Needs to be done:
 - Storage has to be implemented for the php challenge
