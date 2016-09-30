@@ -19,7 +19,7 @@ app.post('/v1/session', function(req, res) {
   } else if (userAgent !== 'VandyCS') {
     res.status(401).send({ error: 'Must access from VandyCS browser' });
   } else {
-    res.status(201).send({ flag: 'agents_for_users' });
+    res.status(201).send({ flag: '_FLAG_(agents_for_users)' });
   }
 });
 

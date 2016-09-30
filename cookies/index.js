@@ -48,7 +48,7 @@ app.get('/v1/user/:username', function(req, res) {
   if (username !== 'admin') {
     res.status(401).send({ error: 'Must be admin to view flag' });
   } else {
-    res.status(201).send({ msg: 'i_like_cookies' });
+    res.status(201).send({ msg: '_FLAG_(i_like_cookies)' });
   }
 });
 

@@ -37,7 +37,7 @@ app.post('/v1/session', function(req, res) {
     res.status(201).send({
       username: username,
       password: password,
-      flag: 'xss_all_day'
+      flag: '_FLAG_(xss_all_day)'
     });
   }
 });

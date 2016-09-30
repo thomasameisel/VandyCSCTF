@@ -31,7 +31,7 @@ app.post('/v1/session', function(req, res) {
 });
 
 app.get('/v1/flag', function(req, res) {
-  res.status(201).send({ flag: 'post_to_me' });
+  res.status(201).send({ flag: '_FLAG_(post_to_me)' });
 });
 
 let server = app.listen(8080, function () {

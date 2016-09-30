@@ -24,7 +24,7 @@ app.post('/v1/session', function(req, res) {
       else if (rows.length === 0) {
         res.status(401).send({ error: 'Username and password are incorrect' });
       } else {
-        res.status(201).send({ flag: 'FLAG: sanitize_your_inputs' });
+        res.status(201).send({ flag: '_FLAG_(sanitize_your_inputs)' });
       }
     });
 });

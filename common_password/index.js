@@ -27,7 +27,7 @@ app.post('/v1/session', function(req, res) {
     res.status(401).send({ error: 'Username and password are incorrect' });
   } else {
     if (username === 'admin') {
-      res.status(201).send({ flag: 'hunter2_in_stars' });
+      res.status(201).send({ flag: '_FLAG_(hunter2_in_stars)' });
     } else {
       res.status(201).send({ flag: 'Must be admin to view flag' });
     }

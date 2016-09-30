@@ -2,6 +2,7 @@
 
 #### Complete:
 - unzipper - unzip the file using multiple different compressions
+  - add that the person is not very security focused
 - cookies - website that change the cookies in order to login using admin
 - post to url - website that exposes the url that gets the flag, no authentication server side when posting to that url
 - login in source - have username and password in the source code
@@ -20,6 +21,7 @@
 - hidden input - change hidden input in form
 - caesar - caesar cipher to decrypt text
 - edit source code - edit css code to reveal flag
+- text in image - hide text in an image
 
 #### Needs to be done:
 - Storage has to be implemented for the php challenge

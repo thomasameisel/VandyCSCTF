@@ -32,7 +32,7 @@ app.get('/v1/dir', function(req, res) {
       res.status(201).send(fileTypes);
     }
   });
-});
+});=
 
 app.get('/v1/file', function(req, res) {
   let file = req.query.name;

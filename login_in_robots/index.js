@@ -28,7 +28,7 @@ app.post('/v1/session', function(req, res) {
   } else if (users[username] !== password) {
     res.status(401).send({ error: 'Username and password are incorrect' });
   } else {
-    res.status(201).send({ flag: 'accept_robot_overlords' });
+    res.status(201).send({ flag: '_FLAG_(accept_robot_overlords)' });
   }
 });
 

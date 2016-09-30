@@ -17,7 +17,7 @@ app.post('/v1/user', function(req, res) {
   if (!req.body.is_admin) {
     res.status(201).send('Must be admin to view flag');
   } else {
-    res.status(201).send('hide_and_go_seek');
+    res.status(201).send('_FLAG_(hide_and_go_seek)');
   }
 });
 
