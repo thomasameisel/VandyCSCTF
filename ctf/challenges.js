@@ -71,7 +71,7 @@ function getCompleted(req, res) {
 }
 
 function getAllCompleted(req, res) {
-  db.all('SELECT users.username AS username, challenge_name, points, time_completed FROM users NATURAL JOIN (completed JOIN challenges ON completed.challenge_id=challenges.ROWID) ORDER BY time_completed DESC',
+  db.all('SELECT users.username AS username, challenge_name, points, time_completed FROM users NATURAL JOIN (completed JOIN challenges ON completed.challenge_id=challenges.ROWID) WHERE users.competing=1 ORDER BY time_completed DESC',
     function(err, rows) {
       if (err) res.status(401).send({ error: 'Error with database' });
       else res.status(201).send(rows);

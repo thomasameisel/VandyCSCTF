@@ -22,3 +22,8 @@
 - Storage has to be implemented for the php challenge
 
 #### Ideas:
+- hidden input - change hidden input in form
+- images - flag hidden in image
+- pdf - flag hidden behind pdf
+- client side encryption
+- url - add to url

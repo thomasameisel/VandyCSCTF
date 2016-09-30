@@ -78,7 +78,6 @@ app.post('/v1/send', function(req, res) {
         message: message
       }
     );
-    console.log(messages);
     res.status(201).send();
   }
 });
