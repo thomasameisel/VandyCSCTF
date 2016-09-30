@@ -4,6 +4,7 @@
 
 let express = require('express');
 let bodyParser = require('body-parser');
+let fs = require('fs');
 let logger = require('morgan');
 let session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
@@ -17,6 +18,9 @@ require('./first_run').firstRun();
 
 let app = express();
 app.use(express.static('public'));
+app.use(logger('common', {
+    stream: fs.createWriteStream('./access.log', {flags: 'a'})
+}));
 app.use(logger('dev'));
 app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));

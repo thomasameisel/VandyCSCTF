@@ -24,7 +24,7 @@ function login(req, res) {
   if (!username || !password) {
     res.status(400).send({ error: 'Must provide username and password' });
   } else {
-    db.get('SELECT users.username, users.hash, users.is_admin, total_points FROM users LEFT OUTER JOIN leaderboard ON users.username = leaderboard.username WHERE users.username=?', username,
+    db.get('SELECT users.username, users.hash, users.is_admin, total_points FROM users LEFT OUTER JOIN total_points ON users.username = total_points.username WHERE users.username=?', username,
       function(err, data) {
         if (err) res.status(400).send({ error: 'Error with database' });
         else if (!data) res.status(401).send({ error: 'Username and password are not correct' });
@@ -35,11 +35,7 @@ function login(req, res) {
             else {
               req.session.username = username;
               req.session.admin = data.is_admin === 1;
-              if (data.total_points === null) res.status(201).send({
-                username: username,
-                is_admin: req.session.admin
-              });
-              else res.status(201).send({
+              res.status(201).send({
                 username: username,
                 is_admin: req.session.admin,
                 points: data.total_points
@@ -54,6 +50,7 @@ function login(req, res) {
 function signup(req, res) {
   let username = req.body.username;
   let password = req.body.password;
+  let non_competing = req.body.non_competing;
   if (!username || !password) {
     res.status(400).send({ error: 'Must provide username and password' });
   } else {
@@ -64,7 +61,7 @@ function signup(req, res) {
         hash.hashPassword(password, (err, hash) => {
           if (err) res.status(401).send({ error: 'Error occurred' });
           else {
-            db.run('INSERT INTO users VALUES (?,?,0)', username, hash);
+            db.run('INSERT INTO users (username,hash,is_admin,competing) VALUES (?,?,0,?)', username, hash, !non_competing);
             req.session.username = username;
             req.session.admin = false;
             res.status(201).send({
@@ -81,7 +78,7 @@ function signup(req, res) {
 
 function auth(req, res) {
   checkLoggedIn(req, res, () => {
-    db.get('SELECT total_points FROM leaderboard WHERE username=?', req.session.username,
+    db.get('SELECT total_points FROM total_points WHERE username=?', req.session.username,
       function(err, data) {
         if (err) res.status(201).send({ username: req.session.username });
         else if (!data) res.status(201).send({

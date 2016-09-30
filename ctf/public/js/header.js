@@ -31,6 +31,8 @@ function populateHeaderLoggedIn(data, redirectToChallenges) {
 
 function populateHeaderLoggedOut() {
   setHeaderButtonsVisibility(false);
+  $('#points_header').text('');
+  $('#profile_header').text('');
 }
 
 function changeHeader() {

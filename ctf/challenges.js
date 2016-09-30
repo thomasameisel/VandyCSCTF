@@ -46,7 +46,7 @@ function submitFlag(req, res) {
           else if (data.flag !== flag) res.status(401).send({ error: 'flag is not correct' });
           else {
             let unixTime = Math.floor(new Date() / 1000);
-            db.run('INSERT OR IGNORE INTO completed (username, challenge_id, time_completed) ' +
+            db.run('INSERT OR IGNORE INTO completed (username,challenge_id,time_completed) ' +
               'VALUES (?,?,?)', req.session.username, challenge_id, unixTime);
             res.status(201).send({ msg: 'Correct answer!' });
           }

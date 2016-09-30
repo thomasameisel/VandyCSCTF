@@ -36,6 +36,7 @@ function submitLogin() {
 
 function submitSignup() {
   let info = inputToJSON('signup');
+  info.non_competing = $('#non_competing').is(':checked');
 
   ajaxPost('/v1/signup', info,
     afterAuth,

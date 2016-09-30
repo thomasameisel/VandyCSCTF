@@ -7,10 +7,10 @@ let prompt = require('prompt');
 let hash = require('./hash');
 
 let db = require('./db').db;
-db.run('CREATE TABLE IF NOT EXISTS users (username text, hash text, is_admin boolean)');
+db.run('CREATE TABLE IF NOT EXISTS users (username text, hash text, is_admin boolean, competing boolean)');
 db.run('CREATE TABLE IF NOT EXISTS completed (username text, challenge_id int, time_completed int)');
 db.run('CREATE TABLE IF NOT EXISTS challenges (challenge_name text, points int, flag text, challenge_content text)');
-db.run('CREATE VIEW IF NOT EXISTS leaderboard AS SELECT users.username, COALESCE(sum(points), 0) AS total_points FROM users LEFT OUTER JOIN (challenges JOIN completed ON challenges.ROWID=completed.challenge_id) ON users.username=completed.username WHERE users.is_admin=0 GROUP BY users.username');
+db.run('CREATE VIEW IF NOT EXISTS total_points AS SELECT users.username, users.competing, COALESCE(sum(points), 0) AS total_points FROM users LEFT OUTER JOIN (challenges JOIN completed ON challenges.ROWID=completed.challenge_id) ON users.username=completed.username GROUP BY users.username');
 db.run('CREATE VIEW IF NOT EXISTS not_completed AS SELECT users.username, challenges.rowid AS challenge_id, challenges.challenge_name, challenges.points FROM users, challenges WHERE challenges.rowid NOT IN (SELECT challenge_id FROM completed WHERE completed.username=users.username)');
 
 prompt.message = undefined;
@@ -42,7 +42,7 @@ function firstRun() {
             hash.hashPassword(password, (err, hash) => {
               if (err) console.log('Error occured');
               else {
-                db.run('INSERT INTO users (username, hash, is_admin) VALUES (?,?,1)', username, hash);
+                db.run('INSERT INTO users (username,hash,is_admin, competing) VALUES (?,?,1,0)', username, hash);
                 console.log('admin account added:', username);
               }
             });
