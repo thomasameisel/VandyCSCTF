@@ -30,7 +30,7 @@ app.post('/v1/session', function(req, res) {
   }
 });
 
-app.post('/v1/flag', function(req, res) {
+app.get('/v1/flag', function(req, res) {
   res.status(201).send({ flag: 'post_to_me' });
 });
 

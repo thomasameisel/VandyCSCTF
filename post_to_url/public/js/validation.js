@@ -9,14 +9,6 @@ function displayError() {
   $('#invalid-msg').css('display', 'inline');
 }
 
-function inputToJSON(formId) {
-  let json = {};
-  $('#'+formId+' input').each(function() {
-    if (this.value) json[this.id] = this.value;
-  });
-  return json;
-}
-
 function changeError(msg) {
   displayError();
   let responseText = JSON.parse(msg.responseText);
@@ -24,30 +16,26 @@ function changeError(msg) {
   return false;
 }
 
-function ajaxPost(url, jsonData, onSuccess, onError) {
+function getFlag() {
   $.ajax({
-    url: url,
-    contentType: 'application/json',
-    type: 'POST',
-    data: JSON.stringify(jsonData),
+    url: '/v1/flag',
+    type: 'GET',
     statusCode: {
-      201: (data) => onSuccess(data),
-      400: (data) => onError(data),
-      401: (data) => onError(data)
+      201: (flag) => $('#flag').text(flag.flag),
     }
   });
 }
 
-function getFlag() {
-  ajaxPost('/v1/flag', undefined,
-    (data) => $('#flag').text(data.flag),
-    () => {});
-}
-
 function submitLogin() {
-  let info = inputToJSON('login');
-
-  ajaxPost('/v1/session', info,
-    getFlag,
-    changeError);
+  $.ajax({
+    url: '/v1/session',
+    contentType: 'application/json',
+    type: 'POST',
+    data: JSON.stringify({ username: $('#username').val(), password: $('#password').val() }),
+    statusCode: {
+      201: getFlag,
+      400: changeError,
+      401: changeError
+    }
+  });
 }

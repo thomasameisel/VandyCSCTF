@@ -14,9 +14,11 @@
 - php - website that saves a file using php, use php vulnerabilities to execute php that will show the flag
 - directory traversal - use directory traversal in order to access admin folder and download flag file
 - common password - admin's password is "password"
+  - Don't want to use this one
+- php echo name - user can use passthru injection to navigate to the flag.txt
+  - Include source code
 
 #### Needs to be done:
-- Storage has to be implemented for the php challenge (natas level 12)
+- Storage has to be implemented for the php challenge
 
 #### Ideas:
-- php echo name that allows a passthru to be executed (natas level 9)
