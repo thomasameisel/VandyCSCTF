@@ -1,4 +1,6 @@
-REDACTED PDF
+## Redacted PDF
+- Hidden is a better word because it's just an overlay
+- Must use a pdf reader to move objects
 
-Must use a pdf reader to move objects
-FLAG:  one_two_three_four
+## Flag
+- FLAG_whats_really_in_pdfs
