@@ -35,6 +35,8 @@
 - edit source code - edit css code to reveal flag
 - text in image - hide text in an image
   - \_FLAG_(thousand_words)
+- redacted pdf - have to highlight the words in a pdf to copy the text
+  - \_FLAG_(whats_really_in_pdfs)
 
 #### Needs to be done:
 - Storage has to be implemented for the php challenge
