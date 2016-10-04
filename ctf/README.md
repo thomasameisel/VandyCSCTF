@@ -1,3 +1,5 @@
+UPDATES MOVED TO [THIS REPO](https://github.com/thomasameisel/CTFTemplate)
+
 ## CTF Template
 
 Uses Node.js and SQLite
