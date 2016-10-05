@@ -2,9 +2,13 @@
 session_start();
 
 if (isset($_FILES["image"]["name"])) {
-    move_uploaded_file($_FILES["image"]["tmp_name"], "images/" . $_FILES["image"]["name"]);
-    $_SESSION["image"] = "images/" . $_FILES["image"]["name"];
-    $message = "Image uploaded";
+    if (exif_imagetype($_FILES["image"]["tmp_name"])) {
+        move_uploaded_file($_FILES["image"]["tmp_name"], "images/" . $_FILES["image"]["name"]);
+        $_SESSION["image"] = "images/" . $_FILES["image"]["name"];
+        $message = "Image uploaded";
+    } else {
+        $message = "Not image file";
+    }
 }
 
 $image = "images/vandycs-logo.png";

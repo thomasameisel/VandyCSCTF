@@ -20,7 +20,10 @@
   - \_FLAG_(xss_all_day)
 - user agent - change user agent to get flag
   - \_FLAG_(agents_for_users)
-- php - website that saves a file using php, use php vulnerabilities to execute php that will show the flag
+- php file flag - website that saves an image, use php vulnerabilities to execute php that will show the flag
+  - \_FLAG_(cannot_trust_files)
+- php file flag - website that saves an image and checks extension, must change magic number to upload file
+  - \_FLAG_(magic_numbers_lie)
 - directory traversal - use directory traversal in order to access admin folder and download flag file
   - \_FLAG_(practice_round_1)
 - common password - admin's password is "password"
@@ -40,10 +43,8 @@
 
 #### Needs to be done:
 - Storage has to be implemented for the php challenge
-- Change the edit source code and pdf and php file flag
+- Change the edit source code
 
 #### Ideas:
-- images - flag hidden in image
-- pdf - flag hidden behind pdf
 - client side encryption
 - url - add to url
