@@ -22,7 +22,7 @@
   - \_FLAG_(agents_for_users)
 - php file flag - website that saves an image, use php vulnerabilities to execute php that will show the flag
   - \_FLAG_(cannot_trust_files)
-- php file flag - website that saves an image and checks extension, must change magic number to upload file
+- php file flag check extension - website that saves an image and checks extension, must change magic number to upload file
   - \_FLAG_(magic_numbers_lie)
 - directory traversal - use directory traversal in order to access admin folder and download flag file
   - \_FLAG_(practice_round_1)
@@ -40,6 +40,9 @@
   - \_FLAG_(thousand_words)
 - redacted pdf - have to highlight the words in a pdf to copy the text
   - \_FLAG_(whats_really_in_pdfs)
+- signup sql injection - have to use sql injection in the signup form and also wildcards in order to get the admin password
+  - Partly bruteforce attack, could be an issue with the server
+  - \_FLAG_(third_times_the_charm)
 
 #### Needs to be done:
 - Storage has to be implemented for the php challenge
