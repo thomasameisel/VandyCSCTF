@@ -15,7 +15,7 @@ app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 db.run('CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, password TEXT)', function(err) {
-  db.run('INSERT OR IGNORE INTO users VALUES ("admin", "2SFwq")');
+  db.run('INSERT OR IGNORE INTO users VALUES ("admin", "dSF1q")');
 });
 
 app.post('/v1/session', function(req, res) {

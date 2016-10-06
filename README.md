@@ -45,7 +45,6 @@
   - \_FLAG_(third_times_the_charm)
 
 #### Needs to be done:
-- Storage has to be implemented for the php challenge
 - Change the edit source code
 
 #### Ideas:

@@ -31,6 +31,7 @@ app.post('/v1/session', function(req, res) {
 });
 
 app.post('/v1/user', function(req, res) {
+  console.log(req.body);
   let username = req.body.username;
   let password = req.body.password;
   if (!username || !password) {
