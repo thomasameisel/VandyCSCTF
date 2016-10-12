@@ -1,0 +1,14 @@
+What would your SSL connection size be if your web server supports 128 bit and your browser supports 256 bit?
+A: 128
+
+Which form of email authentication requires a specific policy for messages signed by the author's domain, which was demoted to historic in 2013?
+A: ADSP
+
+What is the technique used to attack data-driven applications in which certain statements are inserted into the entry field, and then is executed?
+A: SQL injection
+
+What is Internet standard for electronic mail (email) transmission that was first defined by RFC 821 in 1982?
+A: SMTP
+
+What is the name of an attack in which multiple systems flood the bandwidth or resources of a targeted system with traffic?
+A: DDoS
