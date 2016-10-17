@@ -12,3 +12,35 @@ A: SMTP
 
 What is the name of an attack in which multiple systems flood the bandwidth or resources of a targeted system with traffic?
 A: DDoS
+
+What is a list of ACEs?
+A: ACL (Access Control List)
+
+What is needed to control access to a service or object more strictly than is normal with discretionary access control?
+A: Privilege (user rights)
+
+Who maintains the security database stored in registry under HKLMSAM and serves the Local Security Authority with SIDs?
+A: SAM (Security Account Manager)
+
+What is the kernel mode component that does the actual access validation as well as audit generation?
+A: SRM (Security Reference Monitor)
+
+What is a set of encryption APIs that allow developers to develop applications that work securely over non-secure networks, such as the Internet?
+A: CryptoAPI
+
+True or False: CGI scripts are insecure.
+A: true
+
+Microsoft released a tool that aids system administrators in the task of maintaining security across Windows-based servers. It is a command-line tool that enables the administrator to check the patch status of all the machines in a network from a central location. What is this tool called?
+A: HFNetChk Security Tool
+
+A tool works in conjunction with the IIS Lockdown Tool to give IIS Website administrators the ability to restrict HTTP requests that the server will process, and thus prevents potentially harmful requests from reaching the server and causing damage. What is the tool called?
+A: URLScan Security Tool
+
+What is the internal subsystem (as opposed to an environment ditto, such as Win32) within Windows NT that “generates access tokens […], manages the local security policy, and provides interactive user authentication services” (from “Windows NT resources guide”)?
+A: LSA (Local Security Authority)
+
+A thread has the ability to execute in a security context other than from that of the process that owns the security. What is this ability called?
+A: Impersonation
+
+
