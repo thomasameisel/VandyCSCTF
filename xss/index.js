@@ -68,6 +68,9 @@ app.post('/v1/send', function(req, res) {
   let recipient = req.body.recipient;
   let subject = req.body.subject;
   let message = req.body.message;
+  if (recipient === 'admin') {
+    console.log('ADMIN RECEIVED MESSAGE');
+  }
   if (!recipient || !subject || !message) {
     res.status(400).send({ error: 'Must specify recipient, subject, and message' });
   } else {

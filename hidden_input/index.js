@@ -13,7 +13,6 @@ app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/v1/user', function(req, res) {
-  console.log(req.body);
   if (!req.body.is_admin) {
     res.status(201).send('Must be admin to view flag');
   } else {
