@@ -25,7 +25,7 @@
 - php file flag check extension - website that saves an image and checks extension, must change magic number to upload file
   - \_FLAG_(magic_numbers_lie)
 - directory traversal - use directory traversal in order to access admin folder and download flag file
-  - \_FLAG_(practice_round_1)
+  - \_FLAG_(traverse_away)
 - common password - admin's password is "password"
   - Don't want to use this one
 - php echo name - user can use passthru injection to navigate to the flag.txt

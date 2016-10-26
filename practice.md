@@ -18,7 +18,7 @@
 - directory traversal - use directory traversal in order to access admin folder and download flag file
   - 30 points
   - need separate ec2 instance (can navigate to other folders)
-  - \_FLAG_(practice_round_1)
+  - \_FLAG_(traverse_away)
 
 - php echo name - user can use passthru injection to navigate to the flag.txt
   - 40 points

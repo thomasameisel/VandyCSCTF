@@ -9,7 +9,9 @@ let fs = require('fs');
 
 let app = express();
 app.use(express.static('public'));
-app.use(logger('combined'));
+app.use(logger('common', {
+    stream: fs.createWriteStream('./access.log', {flags: 'a'})
+}));
 app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 

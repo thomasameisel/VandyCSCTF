@@ -5,10 +5,13 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 let logger = require('morgan');
+let fs = require('fs');
 
 let app = express();
 app.use(express.static('public'));
-app.use(logger('combined'));
+app.use(logger('common', {
+    stream: fs.createWriteStream('./access.log', {flags: 'a'})
+}));
 app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -31,7 +34,6 @@ app.post('/v1/session', function(req, res) {
 });
 
 app.post('/v1/user', function(req, res) {
-  console.log(req.body);
   let username = req.body.username;
   let password = req.body.password;
   if (!username || !password) {
