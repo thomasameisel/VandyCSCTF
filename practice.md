@@ -10,15 +10,15 @@
   - Q: Unix and Linux use this instead of a file format to check the type of a file.
   - A: magic number
 
-- cookies - website that change the cookies in order to login using admin
-  - 20 points
-  - port 8081
-  - \_FLAG_(i_like_cookies)
-
 - directory traversal - use directory traversal in order to access admin folder and download flag file
-  - 30 points
+  - 20 points
   - need separate ec2 instance (can navigate to other folders)
   - \_FLAG_(traverse_away)
+
+- cookies - website that change the cookies in order to login using admin
+  - 30 points
+  - port 8081
+  - \_FLAG_(i_like_cookies)
 
 - php echo name - user can use passthru injection to navigate to the flag.txt
   - 40 points

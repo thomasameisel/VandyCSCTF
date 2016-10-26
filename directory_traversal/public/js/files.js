@@ -1,6 +1,16 @@
 /*jslint esversion: 6 */
 
-let dir = '';
+let dir = getParameterByName('name') ? getParameterByName('name') : '';
+
+function getParameterByName(name) {
+  let url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 
 function ajaxGet(url, onSuccess, onError) {
   $.ajax({
@@ -16,6 +26,10 @@ function ajaxGet(url, onSuccess, onError) {
 
 function populateFiles(data) {
   $('#files').empty();
+  if (getParameterByName('name')) {
+    $('#files').append('<a id="up_dir" onclick="goUpDir()">Up Directory</a>');
+    $('#files').append('<br />');
+  }
 
   let dirs = data.dirs;
   for (let i = 0; i < dirs.length; ++i) {
@@ -30,23 +44,29 @@ function populateFiles(data) {
   }
 }
 
+function showMessage(data) {
+  $('#files').text(JSON.parse(data.responseText).error);
+}
+
+function goUpDir() {
+  let dir = getParameterByName('name');
+  let upDir = dir.substr(0, dir.indexOf('/')+1);
+  if (dir === upDir) window.location = '/';
+  else window.location = '/dir?name=' + upDir;
+}
+
 function viewFile(id) {
   let file = dir + id;
-  window.location = '/v1/file?name=' + file;
+  window.location = '/file?name=' + file;
 }
 
 function viewDir(id) {
-  let nextDir = dir + id;
-  ajaxGet('/v1/dir?name=' + nextDir,
-    (data) => {
-      dir = dir + id + '/';
-      populateFiles(data);
-    },
-    () => {});
+  let nextDir = dir + id + '/';
+  window.location = '/dir?name=' + nextDir;
 }
 
 function onload() {
-  ajaxGet('/v1/dir',
-    populateFiles,
-    () => {});
+  let url = '/v1/dir';
+  if (getParameterByName('name')) url += '?name=' + getParameterByName('name');
+  ajaxGet(url, populateFiles, showMessage);
 }
