@@ -21,7 +21,7 @@
   - \_FLAG_(i_like_cookies)
 
 - php echo name - user can use passthru injection to navigate to the flag.txt
-  - 40 points
+  - 30 points
   - need separate ec2 instance (can navigate to other folders)
   - include source code (/challenge3/index.php)
   - \_FLAG_(echo_echo_echo_echo)

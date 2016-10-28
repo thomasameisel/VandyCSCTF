@@ -5,10 +5,13 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 let logger = require('morgan');
+let fs = require('fs');
 
 let app = express();
 app.use(express.static('public'));
-app.use(logger('combined'));
+app.use(logger('common', {
+    stream: fs.createWriteStream('./access.log', {flags: 'a'})
+}));
 app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -30,6 +33,6 @@ app.post('/v1/session', function(req, res) {
   }
 });
 
-let server = app.listen(8080, function () {
+let server = app.listen(8081, function () {
     console.log('Example app listening on ' + server.address().port);
 });

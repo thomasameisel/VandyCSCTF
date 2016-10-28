@@ -5,10 +5,13 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 let logger = require('morgan');
+let fs = require('fs');
 
 let app = express();
 app.use(express.static('public'));
-app.use(logger('combined'));
+app.use(logger('common', {
+    stream: fs.createWriteStream('./access.log', {flags: 'a'})
+}));
 app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -34,6 +37,6 @@ app.get('/v1/flag', function(req, res) {
   res.status(201).send({ flag: '_FLAG_(post_to_me)' });
 });
 
-let server = app.listen(8080, function () {
+let server = app.listen(8085, function () {
     console.log('Example app listening on ' + server.address().port);
 });

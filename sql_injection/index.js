@@ -6,11 +6,14 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let logger = require('morgan');
 let sqlite3 = require('sqlite3');
+let fs = require('fs');
 
 let db = new sqlite3.Database(__dirname + '/users.db');
 let app = express();
 app.use(express.static('public'));
-app.use(logger('combined'));
+app.use(logger('common', {
+    stream: fs.createWriteStream('./access.log', {flags: 'a'})
+}));
 app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -32,6 +35,6 @@ app.post('/v1/session', function(req, res) {
     });
 });
 
-let server = app.listen(8080, function () {
+let server = app.listen(8084, function () {
     console.log('Example app listening on ' + server.address().port);
 });
