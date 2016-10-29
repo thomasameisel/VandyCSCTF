@@ -60,39 +60,39 @@
     - \_FLAG_(whats_really_in_pdfs)
 
 - medium - 40 points
-  - 7. sql - sql injection to login
+  - 1. sql - sql injection to login
     - port 8084
     - \_FLAG_(sanitize_your_inputs)
 
-  - 8. post to url - website that exposes the url that gets the flag, no authentication server side when posting to that url
+  - 2. post to url - website that exposes the url that gets the flag, no authentication server side when posting to that url
     - port 8085
     - \_FLAG_(post_to_me)
 
-  - 9. javascript injection - use javascript injection with the child_process node package in order to view file system
+  - 3. javascript injection - use javascript injection with the child_process node package in order to view file system
     - need separate ec2 instance
     - \_FLAG_(js_injector)
 
-  - 10. user agent - change user agent to get flag
+  - 4. user agent - change user agent to get flag
     - port 8086
     - \_FLAG_(agents_for_users)
 
-  - 11. php file flag - website that saves an image, use php vulnerabilities to execute php that will show the flag
+  - 5. php file flag - website that saves an image, use php vulnerabilities to execute php that will show the flag
     - need separate ec2 instance
     - \_FLAG_(cannot_trust_files)
 
-  - 12. text in image - hide text in an image
+  - 6. text in image - hide text in an image
     - \_FLAG_(thousand_words)
 
 - hard - 100 points
-  - 13. xss - use xss scripting in a message to get the admin's password
+  - 1. xss - use xss scripting in a message to get the admin's password
     - port 8087
     - \_FLAG_(xss_all_day)
 
-  - 14. php file flag check extension - website that saves an image and checks extension, must change magic number to upload file
+  - 2. php file flag check extension - website that saves an image and checks extension, must change magic number to upload file
     - need separate ec2 instance
     - \_FLAG_(magic_numbers_lie)
 
-  - 15. signup sql injection - have to use sql injection in the signup form and also wildcards in order to get the admin password
+  - 3. signup sql injection - have to use sql injection in the signup form and also wildcards in order to get the admin password
     - need separate ec2 instance
     - Partly bruteforce attack, could be an issue with the server
     - \_FLAG_(third_times_the_charm)
