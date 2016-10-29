@@ -6,34 +6,34 @@
 
 #### Complete:
 - trivia - 5 points
-  - Q: What would your SSL connection size be if your web server supports 128 bit and your browser supports 256 bit?
+  1. Q: What would your SSL connection size be if your web server supports 128 bit and your browser supports 256 bit?
   - A: 128
 
-  - Q: Which form of email authentication requires a specific policy for messages signed by the author's domain, which was demoted to historic in 2013?
+  2. Q: Which form of email authentication requires a specific policy for messages signed by the author's domain, which was demoted to historic in 2013?
   - A: ADSP
 
-  - Q: What is the technique used to attack database-driven applications in which certain statements are inserted into the entry field, and then is executed?
+  3. Q: What is the technique used to attack database-driven applications in which certain statements are inserted into the entry field, and then is executed?
   - A: SQL injection
 
-  - Q: What is Internet standard for electronic mail (email) transmission that was first defined by RFC 821 in 1982?
+  4. Q: What is Internet standard for electronic mail (email) transmission that was first defined by RFC 821 in 1982?
   - A: SMTP
 
-  - Q: What is the name of an attack in which multiple systems flood the bandwidth or resources of a targeted system with traffic?
+  5. Q: What is the name of an attack in which multiple systems flood the bandwidth or resources of a targeted system with traffic?
   - A: DDoS
 
-  - Q: After what change must a session ID be renewed?
+  6. Q: After what change must a session ID be renewed?
   - A: Privilege level
 
-  - Q: This vulnerability is caused by the timing of certain events or processes.
+  7. Q: This vulnerability is caused by the timing of certain events or processes.
   - A: Race condition
 
-  - Q: What was the highest selling single model of personal computer ever?
+  8. Q: What was the highest selling single model of personal computer ever?
   - A: Commodore 64
 
-  - Q: Dade "Zero Cool" Murphy has started calling himself by a second alias. What is that alias?
+  9. Q: Dade "Zero Cool" Murphy has started calling himself by a second alias. What is that alias?
   - A: Crash Override
 
-  - Q: What company does Elliot Anderson want to topple?
+  10. Q: What company does Elliot Anderson want to topple?
   - A: E Corp
 
 - easy - 20 points
