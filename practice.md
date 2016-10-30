@@ -1,9 +1,5 @@
 ## Practice Competition - 10/27/16 from 6-7pm
 
-#### Login
-- vandy_cs_practice_admin
-- CTF1SF0NforE!VERY&
-
 #### Questions
 - trivia
   - 10 points

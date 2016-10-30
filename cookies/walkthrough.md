@@ -1,0 +1,2 @@
+## Walkthrough
+By looking at the onload function for the body of profile.html, you can see that it calls the loadText function in profile.js. This method gets an "auth" cookie and a "username" cookie then uses a GET request on "/v1/user/{username}" in order to display the text seen in the profile. In order to make the server think you are admin, you can either do a GET request on "/v1/user/admin" or change your "username" cookie to be "admin" and refresh the page.

@@ -1,9 +1,5 @@
 ## CTF Competition - 10/29/16 from 12-2pm
 
-#### Login
-- vandy_cs_admin_accnt
-- ThisISaBASD123!@#!adf
-
 #### Complete:
 ##### Trivia - 5 points
 1. Q: What would your SSL connection size be if your web server supports 128 bit and your browser supports 256 bit?

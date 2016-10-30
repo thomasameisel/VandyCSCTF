@@ -1,0 +1,2 @@
+## Walkthrough
+By looking at the Login button, you can see that it calls the submitLogin function in validation.js. This function does a POST request to "/v1/session" with the form's username and password. If the request returns a 201, it calls the getFlag method. This method does a GET request on "/v1/flag". There is no validation done when doing the GET request, so you can run "curl ip_address/v1/flag" and it will return the flag.

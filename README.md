@@ -1,6 +1,7 @@
 ## VandyCS - Capture The Flag Fall 2016
 
 #### Complete:
+Walkthroughs can be found in each folder
 - unzipper - unzip the file using multiple different compressions
   - \_FLAG_(zip_zip_zip_away)
 - cookies - website that change the cookies in order to login using admin
@@ -43,10 +44,3 @@
 - signup sql injection - have to use sql injection in the signup form and also wildcards in order to get the admin password
   - Partly bruteforce attack, could be an issue with the server
   - \_FLAG_(third_times_the_charm)
-
-#### Needs to be done:
-- Change the edit source code
-
-#### Ideas:
-- client side encryption
-- url - add to url
