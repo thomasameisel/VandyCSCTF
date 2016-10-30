@@ -1,7 +1,7 @@
 ## VandyCS - Capture The Flag Fall 2016
+Walkthroughs can be found in each folder. We encourage you to attempt the challenge before looking at the walkthrough. Please let us know if you have any questions about the walkthroughs.
 
 #### Complete:
-Walkthroughs can be found in each folder
 - unzipper - unzip the file using multiple different compressions
   - \_FLAG_(zip_zip_zip_away)
 - cookies - website that change the cookies in order to login using admin
